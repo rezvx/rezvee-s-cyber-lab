@@ -9,7 +9,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <SectionHeader
             badge="About Me"
-            title="Cybersecurity"
+            title="Network & Cybersecurity"
             highlight="Professional"
             description="Dedicated to ethical security practices and continuous learning"
           />
