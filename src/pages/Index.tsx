@@ -35,15 +35,15 @@ const Index = () => {
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-                Cybersecurity & Network Engineer
+                Network & Cybersecurity Professional
               </h2>
             </div>
 
             {/* Tagline */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Hands-on experience in network engineering and cybersecurity through 
-              controlled lab environments. Passionate about ethical security testing 
-              and building resilient network infrastructures.
+              Hands-on experience designing, securing, and testing network and web application
+environments through controlled lab setups. Skilled in vulnerability assessment,
+security misconfiguration analysis, and defensive network design.
             </p>
 
             {/* CTA Buttons */}
@@ -61,7 +61,7 @@ const Index = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="https://github.com/rezveeparvez" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/rezvx" target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5" />
                   GitHub Profile
                 </a>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,15 +23,13 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-              <Shield className="h-5 w-5 text-primary" />
-            </div>
-            <span className="font-bold text-lg">
-              <span className="text-gradient">Rezvee</span>
-              <span className="text-foreground">.sec</span>
-            </span>
-          </Link>
+          <Link to="/" className="flex items-center group">
+  <img 
+    src={logo} 
+    alt="rezV.me - Network & Cybersecurity Professional" 
+    className="h-40 transition-opacity group-hover:opacity-80"
+  />
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">

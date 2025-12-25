@@ -53,7 +53,7 @@ const Contact = () => {
 
               <div className="space-y-4">
                 <a
-                  href="mailto:rezvee@example.com"
+                  href="mailto:rezveeparvez@gmail.com"
                   className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
                 >
                   <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -61,12 +61,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">Email</div>
-                    <div className="text-foreground">rezvee@example.com</div>
+                    <div className="text-foreground">rezveeparvez@gmail.com</div>
                   </div>
                 </a>
 
                 <a
-                  href="https://linkedin.com/in/rezveeparvez"
+                  href="https://linkedin.com/in/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
@@ -76,12 +76,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">LinkedIn</div>
-                    <div className="text-foreground">linkedin.com/in/rezveeparvez</div>
+                    <div className="text-foreground">linkedin.com/in/rezvx</div>
                   </div>
                 </a>
 
                 <a
-                  href="https://github.com/rezveeparvez"
+                  href="https://github.com/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
@@ -91,7 +91,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">GitHub</div>
-                    <div className="text-foreground">github.com/rezveeparvez</div>
+                    <div className="text-foreground">github.com/rezvx</div>
                   </div>
                 </a>
 

@@ -1,4 +1,5 @@
-import { Shield, Github, Linkedin, Mail } from "lucide-react";
+import {  Github, Linkedin, Mail } from "lucide-react";
+import logo from "@/assets/footer.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -8,18 +9,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Shield className="h-5 w-5 text-primary" />
-              </div>
-              <span className="font-bold text-lg">
-                <span className="text-gradient">Rezvee</span>
-                <span className="text-foreground">.sec</span>
-              </span>
-            </Link>
+             <Link to="/" className="flex items-center group">
+  <img 
+    src={logo} 
+    alt="rezV.me - Network & Cybersecurity Professional" 
+    className="h-32 transition-opacity group-hover:opacity-80"
+  />
+</Link>
             <p className="text-muted-foreground text-sm max-w-md">
-              Cybersecurity & Network Engineer with hands-on experience in lab-based 
-              network setups and web application security testing.
+              Practical experience in network engineering and web application security,
+focused on vulnerability assessment, secure configurations, and risk mitigation
+within lab-based environments.
             </p>
           </div>
 
@@ -44,7 +44,7 @@ const Footer = () => {
             <h4 className="font-semibold text-foreground mb-4">Connect</h4>
             <div className="flex gap-3">
               <a
-                href="https://github.com/rezveeparvez"
+                href="https://github.com/rezvx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary hover:bg-primary/20 hover:text-primary transition-all"
@@ -52,7 +52,7 @@ const Footer = () => {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com/in/rezveeparvez"
+                href="https://linkedin.com/in/rezvx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary hover:bg-primary/20 hover:text-primary transition-all"
@@ -60,7 +60,7 @@ const Footer = () => {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:rezvee@example.com"
+                href="mailto:rezveeparvez@gmail.com"
                 className="p-2 rounded-lg bg-secondary hover:bg-primary/20 hover:text-primary transition-all"
               >
                 <Mail className="h-5 w-5" />

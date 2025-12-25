@@ -24,20 +24,20 @@ const Resume = () => {
                   Rezvee Parvez - Resume
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Cybersecurity & Network Engineer
+                  Network & Cybersecurity Professional
                 </p>
               </div>
 
               <div className="space-y-4">
                 <Button variant="cyber" size="lg" className="w-full" asChild>
-                  <a href="#" download="Rezvee_Parvez_Resume.pdf">
+                  <a href="/Rezvee_Parvez_Resume.pdf" download="Rezvee_Parvez_Resume.pdf">
                     <Download className="h-5 w-5" />
                     Download Resume (PDF)
                   </a>
                 </Button>
 
                 <Button variant="cyber-outline" size="lg" className="w-full" asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
+                  <a href="/Rezvee_Parvez_Resume.pdf" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-5 w-5" />
                     View Online
                   </a>
@@ -55,14 +55,14 @@ const Resume = () => {
                 <div className="cyber-card rounded-lg p-4">
                   <h4 className="font-medium text-foreground mb-2">Education</h4>
                   <p className="text-sm text-muted-foreground">
-                    Bachelor's in Computer Science / Cybersecurity
+                    Bachelor's in Computer Science
                   </p>
                 </div>
 
                 <div className="cyber-card rounded-lg p-4">
                   <h4 className="font-medium text-foreground mb-2">Certifications</h4>
                   <p className="text-sm text-muted-foreground">
-                    CompTIA Security+ (In Progress)
+                    CCNA, CompTIA Security+ (In Progress)
                   </p>
                 </div>
 
