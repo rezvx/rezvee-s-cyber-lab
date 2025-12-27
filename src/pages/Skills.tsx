@@ -7,27 +7,27 @@ const skillCategories = [
   {
     icon: Network,
     title: "Networking",
-    skills: ["TCP/IP", "VLAN Configuration", "OSPF Routing", "Subnetting", "DNS/DHCP", "Network Troubleshooting", "Packet Analysis"],
+    skills: ["TCP/IP", "VLAN Configuration", "Routing Protocols", "Subnetting", "DHCP", "Network Troubleshooting", "Packet Analysis"],
   },
   {
     icon: Shield,
     title: "Cybersecurity",
-    skills: ["VAPT", "OWASP Top 10", "Firewall Configuration", "IDS/IPS", "Security Auditing", "Penetration Testing", "Risk Assessment"],
+    skills: ["VAPT", "OWASP Top 10", "Security Auditing", "Penetration Testing", "Risk Assessment", "Sniffing", "DDoS"],
   },
   {
     icon: Wrench,
     title: "Tools & Technologies",
-    skills: ["Nmap", "Burp Suite", "Wireshark", "Metasploit", "OWASP ZAP", "Nikto", "SQLMap", "Hydra"],
+    skills: ["Nmap", "Burp Suite", "Wireshark", "Metasploit", "OWASP ZAP", "Nikto", "SQLMap", "Hydra", "John the Ripper"],
   },
   {
     icon: Monitor,
     title: "Operating Systems",
-    skills: ["Kali Linux", "Ubuntu Server", "Windows Server", "Parrot OS", "CentOS", "pfSense"],
+    skills: ["Kali Linux", "Ubuntu Server", "Windows Server", "Parrot OS", "CentOS", "Red Hat Enterprise Linux" ],
   },
   {
     icon: FileText,
     title: "Reporting & Documentation",
-    skills: ["Technical Writing", "Executive Summaries", "Risk Reports", "Vulnerability Documentation", "Markdown", "LaTeX"],
+    skills: ["Technical Writing", "Executive Summaries", "Risk Reports", "Vulnerability Documentation", "Markdown", "VAPT Report"],
   },
 ];
 
@@ -61,7 +61,7 @@ const Skills = () => {
             </h3>
             <div className="space-y-4">
               {[
-                { name: "Network Security", level: 85 },
+                { name: "Network Security", level: 70 },
                 { name: "Vulnerability Assessment", level: 80 },
                 { name: "Security Tools", level: 75 },
                 { name: "Technical Documentation", level: 90 },

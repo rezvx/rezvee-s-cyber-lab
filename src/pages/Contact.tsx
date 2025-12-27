@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from "emailjs-com";
 import { Mail, Linkedin, Github, Send, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,24 +10,58 @@ import SectionHeader from "@/components/SectionHeader";
 
 const Contact = () => {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
+    company: "", // honeypot
   });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Honeypot check (bots fill this)
+    if (formData.company) return;
+
+    if (!formRef.current) return;
+
+    emailjs
+      .sendForm(
+        "service_xumx7kc",
+        "template_3siy8gc",
+        formRef.current,
+        "BmOlzrRQ-fz03292k"
+      )
+      .then(() => {
+        toast({
+          title: "Message Sent",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          company: "",
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Message Failed",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      });
   };
 
   return (
@@ -47,21 +82,19 @@ const Contact = () => {
                 Let's Connect
               </h3>
               <p className="text-muted-foreground">
-                I'm always open to discussing new opportunities, security projects, 
-                or just having a conversation about cybersecurity.
+                I'm always open to discussing new opportunities, security projects,
+                or conversations about cybersecurity.
               </p>
 
               <div className="space-y-4">
                 <a
-                  href="mailto:rezveeparvez@gmail.com"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
+                  href="mailto:rezvx@proton.me"
+                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Mail className="h-5 w-5 text-primary" />
-                  </div>
+                  <Mail className="h-5 w-5 text-primary" />
                   <div>
                     <div className="text-sm text-muted-foreground">Email</div>
-                    <div className="text-foreground">rezveeparvez@gmail.com</div>
+                    <div className="text-foreground">rezvx@proton.me</div>
                   </div>
                 </a>
 
@@ -69,11 +102,9 @@ const Contact = () => {
                   href="https://linkedin.com/in/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
+                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Linkedin className="h-5 w-5 text-primary" />
-                  </div>
+                  <Linkedin className="h-5 w-5 text-primary" />
                   <div>
                     <div className="text-sm text-muted-foreground">LinkedIn</div>
                     <div className="text-foreground">linkedin.com/in/rezvx</div>
@@ -84,11 +115,9 @@ const Contact = () => {
                   href="https://github.com/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4 group"
+                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Github className="h-5 w-5 text-primary" />
-                  </div>
+                  <Github className="h-5 w-5 text-primary" />
                   <div>
                     <div className="text-sm text-muted-foreground">GitHub</div>
                     <div className="text-foreground">github.com/rezvx</div>
@@ -96,12 +125,12 @@ const Contact = () => {
                 </a>
 
                 <div className="cyber-card rounded-lg p-4 flex items-center gap-4">
-                  <div className="p-3 rounded-lg bg-secondary">
-                    <MapPin className="h-5 w-5 text-muted-foreground" />
-                  </div>
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
                   <div>
                     <div className="text-sm text-muted-foreground">Location</div>
-                    <div className="text-foreground">Available for Remote Work</div>
+                    <div className="text-foreground">
+                      Available for Remote Work
+                    </div>
                   </div>
                 </div>
               </div>
@@ -112,51 +141,52 @@ const Contact = () => {
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Send a Message
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot */}
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="hidden"
+                />
+
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <Input
-                      name="name"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="bg-secondary border-border focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      name="email"
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-secondary border-border focus:border-primary"
-                    />
-                  </div>
-                </div>
-                <div>
                   <Input
-                    name="subject"
-                    placeholder="Subject"
-                    value={formData.subject}
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-secondary border-border focus:border-primary"
                   />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Your Message"
-                    value={formData.message}
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    className="bg-secondary border-border focus:border-primary resize-none"
                   />
                 </div>
+
+                <Input
+                  name="subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+
+                <Textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                />
+
                 <Button type="submit" variant="cyber" size="lg" className="w-full">
                   <Send className="h-5 w-5" />
                   Send Message

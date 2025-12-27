@@ -19,9 +19,7 @@ const About = () => {
             <div className="space-y-6">
               <div className="cyber-card rounded-xl p-6">
                 <p className="text-lg text-foreground leading-relaxed">
-                  I'm <span className="text-primary font-semibold">Rezvee Parvez</span>, a passionate 
-                  Cybersecurity and Network Engineer with hands-on experience gained through 
-                  rigorous lab-based environments and controlled simulations.
+                  I'm <span className="text-primary font-semibold">Rezvee Parvez</span>, a Network and Cybersecurity professional with hands-on experience from lab-based and simulated environments. My interests include network engineering, web application security, and vulnerability analysis. I focus on building secure network architectures and understanding real attack techniques in order to implement effective defenses. I am continuously developing my skills through practical labs, documentation, and security research.
                 </p>
               </div>
 
