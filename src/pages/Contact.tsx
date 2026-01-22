@@ -1,16 +1,20 @@
-import { useState } from "react";
-import { Mail, Linkedin, Github, Send, MapPin } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Mail, Linkedin, Github, Send, MapPin, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
+import { motion, useReducedMotion } from "framer-motion";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlggjago"; 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlggjago";
 
 const Contact = () => {
   const { toast } = useToast();
+  const prefersReducedMotion = useReducedMotion();
+
+  const email = "rezvx@proton.me";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,11 +25,35 @@ const Contact = () => {
   });
 
   const [isSending, setIsSending] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const fadeUp = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 10 },
+      visible: { opacity: 1, y: 0 },
+    }),
+    [prefersReducedMotion]
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      toast({ title: "Copied", description: "Email address copied to clipboard." });
+      window.setTimeout(() => setCopied(false), 1400);
+    } catch {
+      toast({
+        title: "Copy Failed",
+        description: "Unable to copy email. Please copy it manually.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,7 +76,7 @@ const Contact = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          company: formData.company, // keep honeypot field
+          company: formData.company,
         }),
       });
 
@@ -56,7 +84,7 @@ const Contact = () => {
 
       toast({
         title: "Message Sent",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        description: "Thank you for reaching out. I’ll get back to you soon.",
       });
 
       setFormData({
@@ -80,77 +108,124 @@ const Contact = () => {
   return (
     <Layout>
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 space-y-12">
           <SectionHeader
             badge="Get In Touch"
             title="Contact"
             highlight="Me"
-            description="Feel free to reach out for opportunities or collaborations"
+            description="Feel free to reach out for opportunities, collaborations, or security discussions"
           />
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto items-start">
             {/* Contact Info */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-foreground">
-                Let's Connect
-              </h3>
-              <p className="text-muted-foreground">
-                I'm always open to discussing new opportunities, security projects,
-                or conversations about cybersecurity.
-              </p>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: prefersReducedMotion ? 0.12 : 0.22, ease: "easeOut" }}
+              className="space-y-6"
+            >
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold text-foreground">Let’s Connect</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  I’m open to discussing security projects, networking roles, AppSec work, and
+                  hands-on lab collaborations.
+                </p>
+              </div>
 
-              <div className="space-y-4">
-                <a
-                  href="mailto:rezvx@proton.me"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
-                >
-                  <Mail className="h-5 w-5 text-primary" />
-                  <div>
-                    <div className="text-sm text-muted-foreground">Email</div>
-                    <div className="text-foreground">rezvx@proton.me</div>
+              <div className="space-y-3">
+                {/* Email card */}
+                <div className="cyber-card rounded-xl p-4 sm:p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <a
+                      href={`mailto:${email}`}
+                      className="flex items-center gap-3 min-w-0"
+                      aria-label="Email"
+                    >
+                      <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
+                        <Mail className="h-5 w-5 text-primary" />
+                      </div>
+
+                      <div className="min-w-0">
+                        <div className="text-sm text-muted-foreground">Email</div>
+                        <div className="text-foreground truncate">{email}</div>
+                      </div>
+                    </a>
+
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="icon"
+                      onClick={copyEmail}
+                      aria-label="Copy Email"
+                      className="h-11 w-11 rounded-xl"
+                    >
+                      {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                    </Button>
                   </div>
-                </a>
+                </div>
 
+                {/* LinkedIn */}
                 <a
                   href="https://linkedin.com/in/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
+                  className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3"
+                  aria-label="LinkedIn"
                 >
-                  <Linkedin className="h-5 w-5 text-primary" />
-                  <div>
+                  <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
+                    <Linkedin className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
                     <div className="text-sm text-muted-foreground">LinkedIn</div>
-                    <div className="text-foreground">linkedin.com/in/rezvx</div>
+                    <div className="text-foreground truncate">linkedin.com/in/rezvx</div>
                   </div>
                 </a>
 
+                {/* GitHub */}
                 <a
                   href="https://github.com/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-lg p-4 flex items-center gap-4"
+                  className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3"
+                  aria-label="GitHub"
                 >
-                  <Github className="h-5 w-5 text-primary" />
-                  <div>
+                  <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
+                    <Github className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
                     <div className="text-sm text-muted-foreground">GitHub</div>
-                    <div className="text-foreground">github.com/rezvx</div>
+                    <div className="text-foreground truncate">github.com/rezvx</div>
                   </div>
                 </a>
 
-                <div className="cyber-card rounded-lg p-4 flex items-center gap-4">
-                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                {/* Location */}
+                <div className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3">
+                  <div className="h-11 w-11 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center">
+                    <MapPin className="h-5 w-5 text-muted-foreground" />
+                  </div>
                   <div>
                     <div className="text-sm text-muted-foreground">Location</div>
-                    <div className="text-foreground">
-                      Available for Remote Work
-                    </div>
+                    <div className="text-foreground">Available for Remote Work</div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="cyber-card rounded-xl p-6">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: prefersReducedMotion ? 0.12 : 0.22,
+                ease: "easeOut",
+                delay: prefersReducedMotion ? 0 : 0.04,
+              }}
+              className="cyber-card rounded-xl p-6 sm:p-7"
+            >
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 Send a Message
               </h3>
@@ -174,6 +249,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    autoComplete="name"
                   />
                   <Input
                     name="email"
@@ -182,6 +258,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    autoComplete="email"
                   />
                 </div>
 
@@ -199,7 +276,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={5}
+                  rows={6}
                 />
 
                 <Button
@@ -209,15 +286,26 @@ const Contact = () => {
                   className="w-full"
                   disabled={isSending}
                 >
-                  <Send className="h-5 w-5" />
-                  {isSending ? "Sending..." : "Send Message"}
+                  {isSending ? (
+                    <>
+                      <span className="inline-flex items-center gap-2">
+                        <span className="h-4 w-4 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
+                        Sending...
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
 
-              <p className="mt-4 text-xs text-muted-foreground">
-                Submit your message and I'll get back to you as soon as possible. -Thank you!
+              <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
+                <b>Submit your message and I'll get back to you as soon as possible. Thank you!</b>
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

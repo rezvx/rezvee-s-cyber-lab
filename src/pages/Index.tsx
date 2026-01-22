@@ -35,15 +35,13 @@ const Index = () => {
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-                Network Analyst & Cybersecurity Enthusiast
+                Network & Application Security Practitioner
               </h2>
             </div>
 
             {/* Tagline */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Hands-on experience designing, securing, and testing network and web application
-environments through controlled lab setups. Skilled in vulnerability assessment,
-security misconfiguration analysis, and defensive network design.
+              Hands-on experience designing, securing, and testing network and web application environments in controlled lab setups. Skilled in vulnerability assessment, security misconfiguration analysis, and defensive network design with a strong focus on practical, real-world methodologies.
             </p>
 
             {/* CTA Buttons */}

@@ -4,6 +4,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+/* -----------------------------
+   Base tokens (theme variables)
+-------------------------------- */
 @layer base {
   :root {
     --background: 222 47% 6%;
@@ -40,10 +43,27 @@
     --cyber-glow: 174 72% 56%;
     --cyber-green: 142 70% 45%;
     --cyber-orange: 25 95% 53%;
-    --cyber-gradient: linear-gradient(135deg, hsl(174 72% 56% / 0.2) 0%, hsl(222 47% 6%) 50%, hsl(142 70% 45% / 0.1) 100%);
-    --cyber-card-gradient: linear-gradient(145deg, hsl(222 47% 10%) 0%, hsl(222 47% 6%) 100%);
-    --text-gradient: linear-gradient(135deg, hsl(174 72% 56%) 0%, hsl(142 70% 55%) 100%);
 
+    --cyber-gradient: linear-gradient(
+      135deg,
+      hsl(174 72% 56% / 0.20) 0%,
+      hsl(222 47% 6%) 50%,
+      hsl(142 70% 45% / 0.10) 100%
+    );
+
+    --cyber-card-gradient: linear-gradient(
+      145deg,
+      hsl(222 47% 10%) 0%,
+      hsl(222 47% 6%) 100%
+    );
+
+    --text-gradient: linear-gradient(
+      135deg,
+      hsl(174 72% 56%) 0%,
+      hsl(142 70% 55%) 100%
+    );
+
+    /* Sidebar tokens */
     --sidebar-background: 222 47% 6%;
     --sidebar-foreground: 210 40% 96%;
     --sidebar-primary: 174 72% 56%;
@@ -57,45 +77,99 @@
   .dark {
     --background: 222 47% 6%;
     --foreground: 210 40% 96%;
+
     --card: 222 47% 8%;
     --card-foreground: 210 40% 96%;
+
     --popover: 222 47% 8%;
     --popover-foreground: 210 40% 96%;
+
     --primary: 174 72% 56%;
     --primary-foreground: 222 47% 6%;
+
     --secondary: 222 30% 14%;
     --secondary-foreground: 210 40% 96%;
+
     --muted: 222 30% 18%;
     --muted-foreground: 215 20% 55%;
+
     --accent: 174 72% 40%;
     --accent-foreground: 210 40% 98%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 222 30% 18%;
     --input: 222 30% 14%;
     --ring: 174 72% 56%;
   }
-}
 
-@layer base {
+  /* Base element styling */
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: "Space Grotesk", system-ui, sans-serif;
   }
 
   code, pre {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 }
 
+/* -----------------------------
+   Components (reusable classes)
+-------------------------------- */
+@layer components {
+  /* Consistent “card” baseline used across Skills/Projects/Reports/About */
+  .cyber-card {
+    background: var(--cyber-card-gradient);
+    border: 1px solid hsl(var(--border) / 0.9);
+    border-radius: var(--radius);
+
+    /* Keep shadows subtle to avoid GPU jank on low-end phones */
+    box-shadow:
+      0 10px 28px rgba(0, 0, 0, 0.35);
+
+    /* Smooth but short transitions (avoid heavy motion) */
+    transition:
+      transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .cyber-card:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--cyber-glow) / 0.35);
+
+    /* Subtle glow ring + depth; not an animated “big glow” */
+    box-shadow:
+      0 0 0 1px hsl(var(--cyber-glow) / 0.14),
+      0 14px 34px rgba(0, 0, 0, 0.40);
+  }
+
+  /* Reduce motion for accessibility + low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    .cyber-card,
+    .cyber-card:hover {
+      transition: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+  }
+}
+
+/* -----------------------------
+   Utilities (single-purpose)
+-------------------------------- */
 @layer utilities {
   .text-gradient {
     background: var(--text-gradient);
@@ -104,30 +178,21 @@
     background-clip: text;
   }
 
+  /* Keep glow utility, but do not overuse it */
   .cyber-glow {
-    box-shadow: 0 0 20px hsl(var(--cyber-glow) / 0.3),
-                0 0 40px hsl(var(--cyber-glow) / 0.1);
+    box-shadow:
+      0 0 18px hsl(var(--cyber-glow) / 0.22),
+      0 0 40px hsl(var(--cyber-glow) / 0.08);
   }
 
   .cyber-border {
-    border: 1px solid hsl(var(--cyber-glow) / 0.3);
-  }
-
-  .cyber-card {
-    background: var(--cyber-card-gradient);
-    border: 1px solid hsl(var(--border));
-    transition: all 0.3s ease;
-  }
-
-  .cyber-card:hover {
-    border-color: hsl(var(--cyber-glow) / 0.5);
-    box-shadow: 0 0 30px hsl(var(--cyber-glow) / 0.15);
+    border: 1px solid hsl(var(--cyber-glow) / 0.30);
   }
 
   .grid-pattern {
-    background-image: 
-      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.30) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.30) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 
