@@ -41,7 +41,7 @@ const reports = [
   {
     title: "Over The Wire : Bandit",
     type: "Linux Fundamentals",
-    summary: "Security fundamentals and command-line proficiency exercises from the Over The Wire Bandit challenge series.",
+    summary: "This project involved progressing through multiple levels by discovering hidden files, handling permissions, decoding data, and understanding basic security concepts. The lab strengthened my familiarity with Linux fundamentals, shell commands, and problem-solving under constrained environments.",
     date: "July 2025",
     pdfUrl: "/reports/bandit.pdf",
   },

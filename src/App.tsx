@@ -3,7 +3,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -23,30 +31,48 @@ const queryClient = new QueryClient();
  */
 const RedirectHandler = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(location.search);
     const redirect = params.get("redirect");
 
-    if (redirect) {
-      // Remove the redirect param from the URL after navigating
+    if (redirect && location.search.includes("redirect=")) {
+      // Remove the redirect param and navigate
       navigate(redirect, { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, location.search]);
 
   return null;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+// Subtle, professional transition (fade + slight slide)
+const pageVariants = {
+  initial: { opacity: 0, y: 8, filter: "blur(4px)", scale: 0.995 },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 },
+  exit: { opacity: 0, y: -8, filter: "blur(4px)", scale: 0.995 },
+};
 
-      <BrowserRouter>
-        <RedirectHandler />
 
-        <Routes>
+const pageTransition = {
+  duration: 0.22,
+  ease: "easeOut",
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={pageTransition}
+      >
+        <Routes location={location}>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
@@ -56,6 +82,20 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+
+      <BrowserRouter>
+        <RedirectHandler />
+        <AnimatedRoutes />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
