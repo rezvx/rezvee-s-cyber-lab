@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // ✅ Change this logo import to whatever you want to use in the footer
 // Example: if you want to use your main logo instead of footer.png:
 // import logo from "@/assets/logo.png";
-import logo from "@/assets/footer.png";
+import logo from "@/assets/footer.svg";
 
 const Footer = () => {
   const year = new Date().getFullYear();

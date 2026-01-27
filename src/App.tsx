@@ -1,124 +1,98 @@
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import Navigation from "@/components/Navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
 
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Projects from "./pages/Projects";
-import Reports from "./pages/Reports";
-import Resume from "./pages/Resume";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+// Lazy pages (code splitting)
+const Index = lazy(() => import("./pages/Index"));
+const About = lazy(() => import("./pages/About"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Reports = lazy(() => import("./pages/Reports"));
+const Resume = lazy(() => import("./pages/Resume"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Lazy MotionShell (loads framer-motion only when ready)
+const MotionShell = lazy(() => import("./components/MotionShell"));
 
 const queryClient = new QueryClient();
 
-const RedirectHandler = () => {
+function RedirectHandler() {
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const redirect = params.get("redirect");
-
     if (redirect && location.search.includes("redirect=")) {
       navigate(redirect, { replace: true });
     }
   }, [navigate, location.search]);
 
   return null;
-};
+}
 
-// Safer transitions for mobile Safari (no blur filter)
-const pageVariants = {
-  initial: { opacity: 0, y: 10, scale: 0.995 },
-  animate: { opacity: 1, y: 0, scale: 1 },
-  exit: { opacity: 0, y: -10, scale: 0.995 },
-};
-
-const pageTransition = {
-  duration: 0.22,
-  ease: "easeOut",
-};
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
-
   return null;
 }
 
-function AnimatedRoutes() {
-  const location = useLocation();
-    const prefersReducedMotion = useReducedMotion();
-
-  const variants = prefersReducedMotion
-    ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-      }
-    : {
-        initial: { opacity: 0, y: 8, scale: 0.995 },
-        animate: { opacity: 1, y: 0, scale: 1 },
-        exit: { opacity: 0, y: -8, scale: 0.995 },
-      };
-
-      
-
+function RouteFallback() {
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        className="pt-16 relative z-0"
-        variants={variants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        transition={{ duration: prefersReducedMotion ? 0.12 : 0.22 }}
-      >
-        <Routes location={location}>
-          {/* routes */}
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </motion.div>
-    </AnimatePresence>
+    <div className="pt-24 px-6">
+      <div className="animate-pulse h-6 w-48 rounded mb-4 bg-muted" />
+      <div className="animate-pulse h-4 w-full max-w-xl rounded bg-muted" />
+    </div>
   );
 }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/skills" element={<Skills />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/reports" element={<Reports />} />
+      <Route path="/resume" element={<Resume />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
 
-      <BrowserRouter>
-      <ScrollToTop />
-        <RedirectHandler />
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
 
-        {/* STATIC: top navbar (never animated) */}
-        <Navigation />
+        <BrowserRouter>
+          <ScrollToTop />
+          <RedirectHandler />
 
-        {/* ANIMATED: page content only */}
-        <AnimatedRoutes />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+          {/* Static nav */}
+          <Navigation />
 
-export default App;
+          {/* Route code-splitting */}
+          <Suspense fallback={<RouteFallback />}>
+            {/* Animation shell loads lazily (framer-motion split) */}
+            <Suspense fallback={<div className="pt-16" />}>
+              <MotionShell>
+                <AppRoutes />
+              </MotionShell>
+            </Suspense>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
