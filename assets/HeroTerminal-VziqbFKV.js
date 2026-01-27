@@ -1,0 +1,11 @@
+import{j as e}from"./query-CJM8uAWL.js";import{c as r}from"./index-q5i2nJpl.js";import"./react-1kqR4etN.js";import"./router-BtDGaKJW.js";/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const a=r("Lock",[["rect",{width:"18",height:"11",x:"3",y:"11",rx:"2",ry:"2",key:"1w4ew1"}],["path",{d:"M7 11V7a5 5 0 0 1 10 0v4",key:"fwvmzm"}]]);/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const s=r("Terminal",[["polyline",{points:"4 17 10 11 4 5",key:"akl6gq"}],["line",{x1:"12",x2:"20",y1:"19",y2:"19",key:"q2wloq"}]]);function i(){return e.jsx("div",{className:"hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-96 animate-fade-in",style:{animationDelay:"0.6s"},children:e.jsxs("div",{className:"cyber-card rounded-xl overflow-hidden",children:[e.jsxs("div",{className:"flex items-center gap-2 px-4 py-3 bg-secondary border-b border-border",children:[e.jsx("div",{className:"w-3 h-3 rounded-full bg-destructive/60"}),e.jsx("div",{className:"w-3 h-3 rounded-full bg-cyber-orange/60"}),e.jsx("div",{className:"w-3 h-3 rounded-full bg-cyber-green/60"}),e.jsx("span",{className:"ml-2 text-xs text-muted-foreground font-mono",children:"terminal"})]}),e.jsxs("div",{className:"p-4 font-mono text-sm space-y-2",children:[e.jsxs("div",{className:"flex items-center gap-2",children:[e.jsx(s,{className:"h-4 w-4 text-primary"}),e.jsx("span",{className:"text-muted-foreground",children:"$ whoami"})]}),e.jsx("div",{className:"text-foreground pl-6",children:"rezvee_parvez"}),e.jsxs("div",{className:"flex items-center gap-2",children:[e.jsx(s,{className:"h-4 w-4 text-primary"}),e.jsx("span",{className:"text-muted-foreground",children:"$ cat skills.txt"})]}),e.jsxs("div",{className:"text-cyber-green pl-6",children:["[+] Network Security",e.jsx("br",{}),"[+] VAPT Testing",e.jsx("br",{}),"[+] OWASP Top 10",e.jsx("br",{}),"[+] Infrastructure"]}),e.jsxs("div",{className:"flex items-center gap-2",children:[e.jsx(a,{className:"h-4 w-4 text-cyber-green animate-pulse"}),e.jsx("span",{className:"text-cyber-green",children:"Secure connection"})]})]})]})})}export{i as default};
