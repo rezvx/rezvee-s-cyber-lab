@@ -7,21 +7,18 @@ import Layout from "@/components/Layout";
 
 const HeroTerminal = lazy(() => import("@/components/HeroTerminal"));
 
-/**
- * Schedules work after the initial paint without blocking rendering.
- * Uses requestIdleCallback when available, otherwise falls back to setTimeout.
- */
 function useIdlePrefetch(prefetchFn: () => void, delayMs = 1200) {
   const run = useCallback(() => {
     if (typeof window === "undefined") return;
 
     if ("requestIdleCallback" in window) {
-      const id = (window as any).requestIdleCallback(prefetchFn);
-      return () => (window as any).cancelIdleCallback?.(id);
-    }
+  const id = (window as any).requestIdleCallback(prefetchFn);
+  return () => (window as any).cancelIdleCallback?.(id);
+}
 
-    const id = window.setTimeout(prefetchFn, delayMs) as number;
-    return () => window.clearTimeout(id);
+const id = window.setTimeout(prefetchFn, delayMs);
+return () => window.clearTimeout(id);
+
   }, [prefetchFn, delayMs]);
 
   useEffect(() => {
@@ -31,9 +28,9 @@ function useIdlePrefetch(prefetchFn: () => void, delayMs = 1200) {
 }
 
 export default function Index() {
-  // Prefetch likely next pages after initial render (optional)
+  
   useIdlePrefetch(() => {
-    // Use your actual page modules (relative to this file)
+    
     import("./Projects");
     import("./Resume");
   });
@@ -149,7 +146,7 @@ export default function Index() {
       <section className="py-20 border-t border-border">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
-            {["TCP/IP", "Nmap", "Burp Suite", "Wireshark", "Kali Linux", "OWASP", "AppSec", "VLAN"].map((skill) => (
+            {["TCP/IP", "Nmap", "Burp Suite", "Wireshark", "Kali Linux", "RHEL", "OWASP", "AppSec", "VLAN"].map((skill) => (
               <span
                 key={skill}
                 className="px-6 py-3 rounded-full bg-secondary/50 border border-border text-muted-foreground hover:border-primary/50 hover:text-primary transition-all cursor-default"

@@ -1,9 +1,5 @@
 import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
-// ✅ Change this logo import to whatever you want to use in the footer
-// Example: if you want to use your main logo instead of footer.png:
-// import logo from "@/assets/logo.png";
 import logo from "@/assets/footer.svg";
 
 const Footer = () => {
@@ -84,7 +80,7 @@ const Footer = () => {
                 aria-label="GitHub"
                 className="relative z-10 pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/70 border border-border/60 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200"
               >
-                <Github className="h-5 w-5" />
+                <Github aria-hidden="true" />
               </a>
 
               <a
@@ -94,7 +90,7 @@ const Footer = () => {
                 aria-label="LinkedIn"
                 className="relative z-10 pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/70 border border-border/60 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin aria-hidden="true" />
               </a>
 
               {/* ✅ Mail icon routes to Contact page */}
@@ -104,7 +100,7 @@ const Footer = () => {
                 title="Contact"
                 className="relative z-10 pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/70 border border-border/60 hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200"
               >
-                <Mail className="h-5 w-5" />
+                <Mail aria-hidden="true" />
               </Link>
             </div>
 

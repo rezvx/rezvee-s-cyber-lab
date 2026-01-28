@@ -52,15 +52,15 @@ const ProjectCard = ({
         </div>
       </div>
 
-      <h3 className="font-bold text-xl text-foreground mb-3">{title}</h3>
+      <h1 className="font-bold text-xl text-foreground mb-3">{title}</h1>
 
       <p className="text-sm text-muted-foreground mb-4 flex-1">{objectives}</p>
 
       <div className="space-y-4">
         <div>
-          <h4 className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">
+          <h2 className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">
             Methodology
-          </h4>
+          </h2>
 
           <ul className="text-sm text-muted-foreground space-y-1">
             {methodology.slice(0, 3).map((item, index) => (
@@ -73,9 +73,9 @@ const ProjectCard = ({
         </div>
 
         <div>
-          <h4 className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">
+          <h3 className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">
             Tools Used
-          </h4>
+          </h3>
 
           {/* Tool tags with a subtle stagger on hover */}
           <motion.div

@@ -29,7 +29,7 @@ const SkillCard = ({ icon: Icon, title, skills }: SkillCardProps) => {
           <Icon className="h-6 w-6 text-primary" />
         </motion.div>
 
-        <h3 className="font-semibold text-lg text-foreground">{title}</h3>
+        <h1 className="font-semibold text-lg text-foreground">{title}</h1>
       </div>
 
       {/* Skills (VISIBLE by default) */}

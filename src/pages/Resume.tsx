@@ -20,9 +20,9 @@ const Resume = () => {
             <div className="cyber-card rounded-xl p-8 text-center">
               <div className="p-6 rounded-xl bg-secondary/50 border border-border mb-8">
                 <FileText className="h-24 w-24 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+                <h1 className="text-xl font-semibold text-foreground mb-2">
                   Rezvee Parvez - Resume
-                </h3>
+                </h1>
                 <p className="text-sm text-muted-foreground">
                   Network & Cybersecurity Professional
                 </p>
@@ -31,14 +31,14 @@ const Resume = () => {
               <div className="space-y-4">
                 <Button variant="cyber" size="lg" className="w-full" asChild>
                   <a href="/Rezvee_Parvez_Resume.pdf" download="Rezvee_Parvez_Resume.pdf">
-                    <Download className="h-5 w-5" />
+                    <Download className="h-5 w-5" aria-hidden="true" />
                     Download Resume (PDF)
                   </a>
                 </Button>
 
                 <Button variant="cyber-outline" size="lg" className="w-full" asChild>
                   <a href="/Rezvee_Parvez_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-5 w-5" />
+                    <ExternalLink className="h-5 w-5" aria-hidden="true" />
                     View Online
                   </a>
                 </Button>

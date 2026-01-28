@@ -56,7 +56,7 @@ const ReportCard = ({ title, type, summary, date, pdfUrl }: ReportCardProps) => 
           </span>
         </div>
 
-        <h3 className="font-bold text-lg text-foreground mb-2">{title}</h3>
+        <h1 className="font-bold text-lg text-foreground mb-2">{title}</h1>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
           {summary}
         </p>

@@ -38,9 +38,9 @@ const About = () => {
               className="space-y-6"
             >
               <div className="space-y-3">
-                <h2 className="text-xl md:text-2xl font-semibold text-foreground">
+                <h1 className="text-xl md:text-2xl font-semibold text-foreground">
                   Hi, I’m <span className="text-primary">Rezvee Parvez</span>
-                </h2>
+                </h1>
 
                 <p className="text-muted-foreground leading-relaxed max-w-prose">
                   I’m a network and cybersecurity professional focused on secure network design,
@@ -51,9 +51,9 @@ const About = () => {
 
               {/* Focus Areas */}
               <div className="cyber-card rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
+                <h2 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">
                   Focus Areas
-                </h3>
+                </h2>
 
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   {[

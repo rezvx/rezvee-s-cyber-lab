@@ -127,7 +127,7 @@ const Contact = () => {
               className="space-y-6"
             >
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-foreground">Let’s Connect</h3>
+                <h1 className="text-xl font-semibold text-foreground">Let’s Connect</h1>
                 <p className="text-muted-foreground leading-relaxed">
                   I’m open to discussing security projects, networking roles, AppSec work, and
                   hands-on lab collaborations.
@@ -226,9 +226,9 @@ const Contact = () => {
               }}
               className="cyber-card rounded-xl p-6 sm:p-7"
             >
-              <h3 className="text-xl font-semibold text-foreground mb-6">
+              <h2 className="text-xl font-semibold text-foreground mb-6">
                 Send a Message
-              </h3>
+              </h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Honeypot */}

@@ -118,9 +118,9 @@ const Skills = () => {
 
           {/* Proficiency Levels */}
           <div className="mt-16 max-w-4xl mx-auto">
-            <h3 className="text-xl font-semibold text-center text-foreground mb-8">
+            <h1 className="text-xl font-semibold text-center text-foreground mb-8">
               Core Competencies
-            </h3>
+            </h1>
 
             <div className="space-y-4">
               {coreCompetencies.map((skill) => (
