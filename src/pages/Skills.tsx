@@ -100,6 +100,7 @@ const Skills = () => {
 
  <Helmet>
       <title>Skills | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/skills" />
       <meta
         name="description"
         content="Explore the technical skills and expertise of Rezvee Parvez in networking, cybersecurity, AI learning, and technical documentation."

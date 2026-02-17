@@ -10,6 +10,7 @@ const Resume = () => {
 
  <Helmet>
       <title>Resume | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/resume" />
       <meta
         name="description"
         content="Download and view the professional resume of Rezvee Parvez, a network and cybersecurity professional."

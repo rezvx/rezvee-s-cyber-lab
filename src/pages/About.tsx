@@ -21,7 +21,8 @@ const About = () => {
     <Layout>
 
         <Helmet>
-      <title>About | Rezvee's Cyber Lab</title>
+      <title>About | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/about" />
       <meta
         name="description"
         content="Learn about Rezvee Parvez — a network and cybersecurity professional focused on secure network design, vulnerability assessment, and lab-based learning."

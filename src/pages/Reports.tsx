@@ -54,6 +54,7 @@ const Reports = () => {
 
  <Helmet>
       <title>Reports | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/reports" />
       <meta
         name="description"
         content="Explore detailed technical reports and documentation from Rezvee Parvez's cybersecurity lab projects."

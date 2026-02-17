@@ -110,7 +110,8 @@ const Contact = () => {
     <Layout>
 
        <Helmet>
-      <title>Contact | Rezvee's Cyber Lab</title>
+      <title>Contact | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/contact" />
       <meta
         name="description"
         content="Get in touch with Rezvee Parvez for security projects, networking roles, AppSec Projects"

@@ -99,6 +99,7 @@ const Projects = () => {
 
       <Helmet>
       <title>Projects | Rezvee Parvez</title>
+      <link rel="canonical" href="https://rezv.me/projects" />
       <meta
         name="description"
         content="Explore hands-on cybersecurity projects by Rezvee Parvez, including network design, vulnerability assessment, and AI server testing. Each project includes detailed documentation and reports."
