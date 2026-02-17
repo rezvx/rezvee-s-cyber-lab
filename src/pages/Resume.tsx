@@ -2,10 +2,30 @@ import { Download, FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
+import { Helmet } from "react-helmet-async";
 
 const Resume = () => {
   return (
     <Layout>
+
+ <Helmet>
+      <title>Resume | Rezvee Parvez</title>
+      <meta
+        name="description"
+        content="Download and view the professional resume of Rezvee Parvez, a network and cybersecurity professional."
+      />
+      <meta
+        name="keywords"
+        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
+      />
+      <meta property="og:title" content="Resume | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader

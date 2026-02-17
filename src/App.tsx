@@ -1,4 +1,5 @@
 import { useEffect, Suspense, lazy } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -70,18 +71,16 @@ function AppRoutes() {
 
 export default function App() {
   return (
+    <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-
         <BrowserRouter>
           <ScrollToTop />
           <RedirectHandler />
-
           {/* Static nav */}
           <Navigation />
-
           {/* Route code-splitting */}
           <Suspense fallback={<RouteFallback />}>
             {/* Animation shell loads lazily (framer-motion split) */}
@@ -94,5 +93,6 @@ export default function App() {
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
+  </HelmetProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { Shield, Target, BookOpen, Award, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
+import { Helmet } from "react-helmet-async";
 import SectionHeader from "@/components/SectionHeader";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -16,7 +17,28 @@ const About = () => {
     : { y: -4 };
 
   return (
+    
     <Layout>
+
+        <Helmet>
+      <title>About | Rezvee's Cyber Lab</title>
+      <meta
+        name="description"
+        content="Learn about Rezvee Parvez — a network and cybersecurity professional focused on secure network design, vulnerability assessment, and lab-based learning."
+      />
+      <meta
+        name="keywords"
+        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
+      />
+      <meta property="og:title" content="About | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Network & Cybersecurity Professional dedicated to ethical security practices."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
+       
+
       <section className="py-20">
         <div className="container mx-auto px-4 space-y-12">
           <SectionHeader

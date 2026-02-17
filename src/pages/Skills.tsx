@@ -2,6 +2,7 @@ import { Network, Shield, Wrench, Monitor, FileText, Brain } from "lucide-react"
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import SkillCard from "@/components/SkillCard";
+import { Helmet } from "react-helmet-async";
 
 const skillCategories = [
   {
@@ -96,6 +97,25 @@ const Skills = () => {
 
   return (
     <Layout>
+
+ <Helmet>
+      <title>Skills | Rezvee Parvez</title>
+      <meta
+        name="description"
+        content="Explore the technical skills and expertise of Rezvee Parvez in networking, cybersecurity, AI learning, and technical documentation."
+      />
+      <meta
+        name="keywords"
+        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
+      />
+      <meta property="og:title" content="Skills | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader

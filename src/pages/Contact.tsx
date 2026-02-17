@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import { motion, useReducedMotion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlggjago";
 
@@ -14,7 +15,7 @@ const Contact = () => {
   const { toast } = useToast();
   const prefersReducedMotion = useReducedMotion();
 
-  const email = "rezvx@proton.me";
+  const email = "hello@rezv.me";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -107,6 +108,25 @@ const Contact = () => {
 
   return (
     <Layout>
+
+       <Helmet>
+      <title>Contact | Rezvee's Cyber Lab</title>
+      <meta
+        name="description"
+        content="Get in touch with Rezvee Parvez for security projects, networking roles, AppSec Projects"
+      />
+      <meta
+        name="keywords"
+        content="contact, Rezvee Parvez, cybersecurity, AppSec, networking, security collaboration"
+      />
+      <meta property="og:title" content="Contact | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Open to discussing security projects, networking roles, and lab collaborations."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
+
       <section className="py-20">
         <div className="container mx-auto px-4 space-y-12">
           <SectionHeader

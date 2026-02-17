@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import ReportCard from "@/components/ReportCard";
+import { Helmet } from "react-helmet-async";
 
 const reports = [
   {
@@ -50,6 +51,25 @@ const reports = [
 const Reports = () => {
   return (
     <Layout>
+
+ <Helmet>
+      <title>Reports | Rezvee Parvez</title>
+      <meta
+        name="description"
+        content="Explore detailed technical reports and documentation from Rezvee Parvez's cybersecurity lab projects."
+      />
+      <meta
+        name="keywords"
+        content="cybersecurity reports, technical documentation, vulnerability analysis, risk assessment, network security, web application security"
+      />
+      <meta property="og:title" content="Reports | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader

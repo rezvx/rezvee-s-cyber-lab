@@ -1,114 +1,124 @@
 # rezV.me — Cybersecurity & Network Engineering Portfolio
 
-This repository contains the source code for **rezV.me**, my personal cybersecurity and network engineering portfolio website.  
-The site is designed to showcase **hands-on lab projects**, **technical reports**, and **practical skills** across networking, cybersecurity, and local AI experimentation.
+Personal portfolio showcasing hands-on lab projects, technical reports, and practical skills in networking, cybersecurity, and home lab experimentation.
 
-🔗 **Live Site:** https://rezv.me  
-📂 **Reports & Evidence:** Available directly on the site  
+🔗 **Live Site:** [rezv.me](https://rezv.me)  
 🧪 **All work conducted in authorized lab environments**
 
 ---
 
-## 📌 Purpose of This Portfolio
+## Overview
 
-The goal of this portfolio is to demonstrate **practical, applied skills** rather than theoretical knowledge alone.  
-All showcased projects are based on **structured lab environments**, simulating real-world scenarios such as:
+This portfolio is built to demonstrate **applied, practical skills** rather than theoretical knowledge alone. Every project is based on structured lab environments simulating real-world scenarios — from enterprise network design to web application vulnerability assessment.
 
-- Enterprise network design
-- Secure WAN routing
-- Network troubleshooting
-- Web application vulnerability assessment
-- Local AI server testing
-
-This site serves as a **technical showcase** for roles such as:
+**Target Roles**
 - SOC Analyst (Junior)
 - Network Engineer (Junior)
 - Security Analyst / Pentester (Entry-Level)
 
 ---
 
-## 🧩 Featured Projects
+## Featured Projects
 
-### 1️⃣ Enterprise Network Design (VLAN & Inter-VLAN Routing)
-- Designed a segmented enterprise LAN using VLANs
-- Implemented 802.1Q trunking and router-on-a-stick routing
-- Validated gateway reachability and end-to-end connectivity  
-📄 **Report included**
+| # | Project | Report |
+|---|---------|--------|
+| 1 | Enterprise Network Design (VLAN & Inter-VLAN Routing) | ✅ |
+| 2 | Secure WAN Connectivity (OSPF + ACL) | ✅ |
+| 3 | Network Troubleshooting & Performance Validation | — |
+| 4 | Web Application VAPT — DVWA (OWASP Top 10) | ✅ |
+| 5 | Local AI Server Testing (Ollama + Open WebUI) | — |
+| 6 | Portfolio Website (This Project) | — |
 
-### 2️⃣ Secure WAN Connectivity (OSPF + ACL)
-- Built a multi-site WAN topology using OSPF
-- Applied ACLs for controlled inter-site communication
-- Verified routing convergence and security enforcement  
-📄 **Report included**
+### 1. Enterprise Network Design
+Designed a segmented enterprise LAN using VLANs, 802.1Q trunking, and router-on-a-stick routing. Validated gateway reachability and end-to-end connectivity.
 
-### 3️⃣ Network Troubleshooting & Performance Validation
-- Simulated real-world network failures
-- Diagnosed issues using structured troubleshooting methodology
-- Documented root cause → fix mapping
+### 2. Secure WAN Connectivity
+Built a multi-site WAN topology using OSPF. Applied ACLs for controlled inter-site communication and verified routing convergence and security enforcement.
 
-### 4️⃣ Web Application VAPT (OWASP Top 10) — DVWA
-- Conducted vulnerability assessment on DVWA
-- Tested OWASP Top 10 categories
-- Documented findings with impact and remediation  
-📄 **Report included**
+### 3. Network Troubleshooting & Performance Validation
+Simulated real-world network failures, diagnosed issues using a structured methodology, and documented root cause → fix mapping.
 
-### 5️⃣ Local AI Server Testing (Ollama + Open WebUI)
-- Deployed a local AI stack using Docker
-- Tested multiple local LLMs
-- Evaluated performance and stability for daily usage
+### 4. Web Application VAPT (OWASP Top 10)
+Conducted a full vulnerability assessment on DVWA covering OWASP Top 10 categories. Documented findings with impact ratings and remediation guidance.
 
-### 6️⃣ Portfolio Website (This Project)
-- Built using Vite + React + TypeScript
-- Customized UI, branding, favicon, and SEO metadata
-- Deployed via GitHub Pages (`gh-pages`) with a custom domain
+### 5. Local AI Server Testing
+Deployed a local AI stack using Docker (Ollama + Open WebUI). Tested multiple local LLMs and evaluated performance and stability for daily usage.
+
+### 6. Portfolio Website
+Built with Vite + React + TypeScript. Includes custom UI, branding, SEO metadata, and sitemap. Deployed via GitHub Pages with a custom domain.
 
 ---
 
-## 🛠️ Technologies Used
+## Tech Stack
 
-### Frontend & Deployment
-- **Vite**
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **shadcn/ui**
-- **GitHub Pages (gh-pages)**
-- **Custom Domain + DNS**
+**Frontend & Deployment**
 
-### Networking & Security Labs
-- **Cisco Packet Tracer**
-- **OSPF**
-- **VLAN / Inter-VLAN Routing**
-- **Access Control Lists (ACLs)**
-- **Kali Linux**
-- **DVWA**
-- **Burp Suite**
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=flat&logo=github&logoColor=white)
 
-### AI / Home Lab
-- **Docker**
-- **Ollama**
-- **Open WebUI**
-- **Local LLMs**
-- **WSL / Linux**
+**Networking & Security**
+
+![Kali Linux](https://img.shields.io/badge/Kali_Linux-557C94?style=flat&logo=kalilinux&logoColor=white)
+![Cisco](https://img.shields.io/badge/Cisco_Packet_Tracer-1BA0D7?style=flat&logo=cisco&logoColor=white)
+![Burp Suite](https://img.shields.io/badge/Burp_Suite-FF6633?style=flat&logo=burpsuite&logoColor=white)
+
+**Home Lab / AI**
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
 
 ---
 
-## 📂 Repository Structure
+## Project Structure
 
-```text
-.
+```
+rezv.me/
 ├── public/
-│   ├── reports/                 # PDF reports linked from the site
+│   ├── reports/          # PDF reports linked from the site
 │   ├── favicon.ico
 │   ├── site.webmanifest
-│   ├── CNAME                    # Custom domain configuration
+│   └── CNAME             # Custom domain config
 │
 ├── src/
-│   ├── components/              # Reusable UI components
-│   ├── pages/                   # Pages (Home, Projects, Reports, Contact)
-│   ├── assets/                  # Images & branding
+│   ├── components/       # Reusable UI components
+│   ├── pages/            # Home, About, Projects, Reports, Contact
+│   ├── assets/           # Images & branding
 │   └── main.tsx
 │
 ├── index.html
 ├── vite.config.ts
 └── package.json
+```
+
+---
+
+## Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/rezvx/rezv.me.git
+cd rezv.me
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
+
+## License
+
+This project is for portfolio and educational purposes.  
+All lab work was conducted in authorized, isolated environments.
+
+---
+
+<p align="center">Built by <a href="https://rezv.me">Rezvee Parvez</a></p>

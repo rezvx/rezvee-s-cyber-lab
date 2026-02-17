@@ -1,9 +1,10 @@
 import { useEffect, Suspense, lazy, useCallback } from "react";
 import { ArrowRight, Github, Download, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
+
+
 
 const HeroTerminal = lazy(() => import("@/components/HeroTerminal"));
 
@@ -146,7 +147,7 @@ export default function Index() {
       <section className="py-20 border-t border-border">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
-            {["TCP/IP", "Nmap", "Burp Suite", "Wireshark", "Kali Linux", "RHEL", "OWASP", "AppSec", "VLAN"].map((skill) => (
+            {["TCP/IP", "Nmap", "Burp Suite", "Windows Server", "Kali Linux", "RHEL", "OWASP", "AppSec", "VLAN"].map((skill) => (
               <span
                 key={skill}
                 className="px-6 py-3 rounded-full bg-secondary/50 border border-border text-muted-foreground hover:border-primary/50 hover:text-primary transition-all cursor-default"

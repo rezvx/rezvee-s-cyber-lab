@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import ProjectCard from "@/components/ProjectCard";
+import { Helmet } from "react-helmet-async";
 
 const projects = [
   {
@@ -86,7 +87,7 @@ const projects = [
     "Deployed using GitHub Pages (gh-pages) with custom domain (rezv.me)",
     "Maintained local dev → build → deploy workflow",
   ],
-   tools: ["Vite", "React", "Tailwind", "shadcn/ui", "GitHub Pages",],
+   tools: ["Vite", "React", "Tailwind", "shadcn/ui", "Cloudflare Pages",],
   githubUrl: "https://github.com/rezvx/rezvee-s-cyber-lab",
   liveUrl: "https://rezv.me",
   },
@@ -95,6 +96,24 @@ const projects = [
 const Projects = () => {
   return (
     <Layout>
+
+      <Helmet>
+      <title>Projects | Rezvee Parvez</title>
+      <meta
+        name="description"
+        content="Explore hands-on cybersecurity projects by Rezvee Parvez, including network design, vulnerability assessment, and AI server testing. Each project includes detailed documentation and reports."
+      />
+      <meta
+        name="keywords"
+        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
+      />
+      <meta property="og:title" content="Projects | Rezvee Parvez" />
+      <meta
+        property="og:description"
+        content="Network & Cybersecurity Professional dedicated to ethical security practices."
+      />
+      <meta property="og:type" content="website" />
+    </Helmet>
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader

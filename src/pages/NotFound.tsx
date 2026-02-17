@@ -2,10 +2,17 @@ import { Link } from "react-router-dom";
 import { ShieldAlert, ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import { Helmet } from "react-helmet-async";
 
 const NotFound = () => {
   return (
     <Layout>
+      
+      <Helmet>
+        <title>404 Not Found | Rezvee Parvez</title>
+        <meta name="description" content="The requested page was not found on the server." />
+      </Helmet>
+
       <section className="min-h-[70vh] flex items-center justify-center">
         <div className="text-center max-w-md px-4">
           <div className="mx-auto mb-6 w-14 h-14 flex items-center justify-center rounded-full bg-primary/10">
