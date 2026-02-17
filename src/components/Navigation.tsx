@@ -10,7 +10,7 @@ const MobileMenuOverlay = lazy(() => import("./MobileMenuOverlay"));
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  { name: "About Me", path: "/about" },
   { name: "Skills", path: "/skills" },
   { name: "Projects", path: "/projects" },
   { name: "Reports", path: "/reports" },

@@ -55,6 +55,7 @@ const Footer = () => {
                 { label: "Projects", to: "/projects" },
                 { label: "Reports", to: "/reports" },
                 { label: "Resume", to: "/resume" },
+                { label: "About Me", to: "/about" },
                 
               ].map((item) => (
                 <Link
@@ -93,7 +94,7 @@ const Footer = () => {
                 <Linkedin aria-hidden="true" />
               </a>
 
-              {/* ✅ Mail icon routes to Contact page */}
+              {/* Mail icon routes to Contact page */}
               <Link
                 to="/contact"
                 aria-label="Contact"
@@ -104,7 +105,7 @@ const Footer = () => {
               </Link>
             </div>
 
-            {/* Small helper text (optional, professional) */}
+            {/* Small helper text */}
             <p className="mt-4 text-xs text-muted-foreground max-w-xs">
               Feel free to reach out for collaborations, questions, or just to say hi!
             </p>

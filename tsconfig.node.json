@@ -1,22 +1,26 @@
 {
   "compilerOptions": {
+    /* Node runtime */
     "target": "ES2022",
     "lib": ["ES2023"],
     "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+
+    /* Node typings (IMPORTANT) */
+    "types": ["node"],
+
+    /* Build/tooling behavior */
+    "skipLibCheck": true,
     "isolatedModules": true,
     "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
     "noEmit": true,
 
-    /* Linting */
+    /* Linting / type checking */
     "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noUnusedParameters": false
   },
   "include": ["vite.config.ts"]
 }
