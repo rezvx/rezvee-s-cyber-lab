@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import ReportCard from "@/components/ReportCard";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
 
 const reports = [
   {
@@ -52,24 +52,16 @@ const Reports = () => {
   return (
     <Layout>
 
- <Helmet>
-      <title>Reports | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/reports" />
-      <meta
-        name="description"
-        content="Explore detailed technical reports and documentation from Rezvee Parvez's cybersecurity lab projects."
-      />
-      <meta
-        name="keywords"
-        content="cybersecurity reports, technical documentation, vulnerability analysis, risk assessment, network security, web application security"
-      />
-      <meta property="og:title" content="Reports | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
+ <PageHelmet
+                 title="Reports | Rezvee Parvez"
+                 canonical="https://rezv.me/reports"
+                 description="Explore detailed cybersecurity reports, including executive summaries, technical write-ups, and risk assessments from my lab projects. Each report provides insights into vulnerabilities, methodologies, and remediation strategies."
+                 keywords="Rezvee Parvez, cybersecurity reports, executive summaries, technical write-ups, risk assessments, vulnerability analysis, remediation strategies"
+                 ogTitle="Reports | Rezvee Parvez"
+                 ogDescription="Explore detailed cybersecurity reports, including executive summaries, technical write-ups, and risk assessments from my lab projects. Each report provides insights into vulnerabilities, methodologies, and remediation strategies."
+                 ogType="website"
+               />
+               
 
       <section className="py-20">
         <div className="container mx-auto px-4">

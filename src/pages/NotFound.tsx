@@ -2,16 +2,21 @@ import { Link } from "react-router-dom";
 import { ShieldAlert, ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
+
 
 const NotFound = () => {
   return (
     <Layout>
       
-      <Helmet>
-        <title>404 Not Found | Rezvee Parvez</title>
-        <meta name="description" content="The requested page was not found on the server." />
-      </Helmet>
+     <PageHelmet
+                     title="404 Error | Rezvee Parvez"
+                     description="The page you are looking for cannot be found. Explore Rezvee Parvez's cybersecurity projects, certifications, and contact information."
+                     keywords="404 error, page not found, Rezvee Parvez, cybersecurity projects, certifications, contact"
+                     ogTitle="404 Error | Rezvee Parvez"
+                     ogDescription="The page you are looking for cannot be found. Explore Rezvee Parvez's cybersecurity projects, certifications, and contact information."
+                     ogType="website"
+                   />
 
       <section className="min-h-[70vh] flex items-center justify-center">
         <div className="text-center max-w-md px-4">

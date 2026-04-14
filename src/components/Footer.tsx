@@ -52,10 +52,10 @@ const Footer = () => {
 
             <nav className="flex flex-col gap-2">
               {[
+                { label: "About Me", to: "/about" },
                 { label: "Projects", to: "/projects" },
                 { label: "Reports", to: "/reports" },
-                { label: "Resume", to: "/resume" },
-                { label: "About Me", to: "/about" },
+                { label: "Certifications", to: "/certifications" },
                 
               ].map((item) => (
                 <Link

@@ -9,20 +9,21 @@ import { Button } from "@/components/ui/button";
 const MobileMenuOverlay = lazy(() => import("./MobileMenuOverlay"));
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About Me", path: "/about" },
-  { name: "Skills", path: "/skills" },
-  { name: "Projects", path: "/projects" },
-  { name: "Reports", path: "/reports" },
-  { name: "Resume", path: "/resume" },
-  { name: "Contact", path: "/contact" },
+  { name: "Home",           path: "/" },
+  { name: "About Me",       path: "/about" },
+  { name: "Skills",         path: "/skills" },
+  { name: "Projects",       path: "/projects" },
+  { name: "Reports",        path: "/reports" },
+  { name: "Certifications", path: "/certifications" },
+  { name: "Resume",         path: "/resume" },
+  { name: "Contact",        path: "/contact" },
 ] as const;
 
-// Preload route chunks on intent (hover / focus)
 const preloadMap: Partial<Record<(typeof navItems)[number]["path"], () => Promise<unknown>>> = {
-  "/projects": () => import("@/pages/Projects"),
-  "/reports": () => import("@/pages/Reports"),
-  "/resume": () => import("@/pages/Resume"),
+  "/projects":       () => import("@/pages/Projects"),
+  "/reports":        () => import("@/pages/Reports"),
+  "/certifications": () => import("@/pages/Certifications"),
+  "/resume":         () => import("@/pages/Resume"),
 };
 
 export default function Navigation() {
@@ -37,10 +38,8 @@ export default function Navigation() {
   // Lock background scroll when menu is open
   useEffect(() => {
     if (!isOpen) return;
-
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = prevOverflow;
     };
@@ -49,19 +48,20 @@ export default function Navigation() {
   // Close on ESC
   useEffect(() => {
     if (!isOpen) return;
-
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
     };
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
-  // Portal target
-  const portalTarget = useMemo(() => (typeof window === "undefined" ? null : document.body), []);
+  const portalTarget = useMemo(
+    () => (typeof window === "undefined" ? null : document.body),
+    []
+  );
 
-  const onPreload = (path: (typeof navItems)[number]["path"]) => preloadMap[path]?.();
+  const onPreload = (path: (typeof navItems)[number]["path"]) =>
+    preloadMap[path]?.();
 
   return (
     <>
@@ -69,6 +69,7 @@ export default function Navigation() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
+
             {/* Logo */}
             <Link to="/" className="flex items-center group" aria-label="Go to Home">
               <img
@@ -86,7 +87,6 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => {
                 const active = location.pathname === item.path;
-
                 return (
                   <Link
                     key={item.path}
@@ -117,11 +117,12 @@ export default function Navigation() {
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
+
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu overlay via portal (lazy-loaded framer-motion) */}
+      {/* Mobile menu overlay via portal */}
       {portalTarget
         ? createPortal(
             <Suspense fallback={null}>

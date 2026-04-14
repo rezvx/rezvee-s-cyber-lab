@@ -2,31 +2,22 @@ import { Download, FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
 
 const Resume = () => {
   return (
     <Layout>
 
- <Helmet>
-      <title>Resume | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/resume" />
-      <meta
-        name="description"
-        content="Download and view the professional resume of Rezvee Parvez, a network and cybersecurity professional."
-      />
-      <meta
-        name="keywords"
-        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
-      />
-      <meta property="og:title" content="Resume | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
-
+ <PageHelmet
+                 title="Resume | Rezvee Parvez"
+                 canonical="https://rezv.me/resume"
+                 description="Showcasing my cybersecurity certifications, including CCNA and TryHackMe achievements, validating my skills in network security and ethical hacking through my professional resume."
+                 keywords="Rezvee Parvez, cybersecurity certifications, network security certifications, ethical hacking certifications, CCNA, TryHackMe, Hack & Fix"
+                 ogTitle="Resume | Rezvee Parvez"
+                 ogDescription="Showcasing my cybersecurity certifications, including CCNA and TryHackMe achievements, validating my skills in network security and ethical hacking through my professional resume."
+                 ogType="website"
+               />
+               
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader

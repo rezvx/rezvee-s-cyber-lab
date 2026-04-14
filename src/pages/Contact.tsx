@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Mail, Linkedin, Github, Send, MapPin, Copy, Check } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import { motion, useReducedMotion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlggjago";
 
@@ -109,24 +110,15 @@ const Contact = () => {
   return (
     <Layout>
 
-       <Helmet>
-      <title>Contact | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/contact" />
-      <meta
-        name="description"
-        content="Get in touch with Rezvee Parvez for security projects, networking roles, AppSec Projects"
-      />
-      <meta
-        name="keywords"
-        content="contact, Rezvee Parvez, cybersecurity, AppSec, networking, security collaboration"
-      />
-      <meta property="og:title" content="Contact | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Open to discussing security projects, networking roles, and lab collaborations."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
+       <PageHelmet
+                 title="Contacts | Rezvee Parvez"
+                 canonical="https://rezv.me/contact"
+                 description="Contact Rezvee Parvez for security projects, networking roles, AppSec work, and hands-on collaborations."
+                 keywords="Rezvee Parvez, contact, email, LinkedIn, GitHub, WhatsApp"
+                 ogTitle="Contacts | Rezvee Parvez"
+                 ogDescription="Get in touch with Rezvee Parvez for security projects, networking roles, AppSec work, and hands-on collaborations."
+                 ogType="website"
+               />
 
       <section className="py-20">
         <div className="container mx-auto px-4 space-y-12">
@@ -137,7 +129,9 @@ const Contact = () => {
             description="Feel free to reach out for opportunities, collaborations, or security discussions"
           />
 
-          <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto items-start">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+
+
             {/* Contact Info */}
             <motion.div
               variants={fadeUp}
@@ -145,7 +139,7 @@ const Contact = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: prefersReducedMotion ? 0.12 : 0.22, ease: "easeOut" }}
-              className="space-y-6"
+              className="space-y-6 h-full"
             >
               <div className="space-y-2">
                 <h1 className="text-xl font-semibold text-foreground">Let’s Connect</h1>
@@ -157,8 +151,8 @@ const Contact = () => {
 
               <div className="space-y-3">
                 {/* Email card */}
-                <div className="cyber-card rounded-xl p-4 sm:p-5">
-                  <div className="flex items-start justify-between gap-4">
+                <div className="cyber-card rounded-xl p-4 sm:p-5 w-full">
+                  <div className="flex items-start justify-between gap-4 w-full">
                     <a
                       href={`mailto:${email}`}
                       className="flex items-center gap-3 min-w-0"
@@ -187,12 +181,29 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* WhatsApp */}
+<a
+  href="https://wa.me/8801723339708"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="cyber-card rounded-xl p-4 sm:p-5 w-full flex items-center gap-3"
+  aria-label="WhatsApp"
+>
+  <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
+    <FaWhatsapp className="h-5 w-5 text-primary" />
+  </div>
+  <div className="min-w-0">
+    <div className="text-sm text-muted-foreground">WhatsApp</div>
+    <div className="text-foreground truncate">+880 172 333 9708</div>
+  </div>
+</a>
+
                 {/* LinkedIn */}
                 <a
                   href="https://linkedin.com/in/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3"
+                  className="cyber-card rounded-xl p-4 sm:p-5 w-full flex items-center gap-3"
                   aria-label="LinkedIn"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
@@ -209,7 +220,7 @@ const Contact = () => {
                   href="https://github.com/rezvx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3"
+                  className="cyber-card rounded-xl p-4 sm:p-5 w-full flex items-center gap-3"
                   aria-label="GitHub"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary/10 border border-border/60 flex items-center justify-center">
@@ -222,7 +233,7 @@ const Contact = () => {
                 </a>
 
                 {/* Location */}
-                <div className="cyber-card rounded-xl p-4 sm:p-5 flex items-center gap-3">
+                <div className="cyber-card rounded-xl p-4 sm:p-5 w-full flex items-center gap-3">
                   <div className="h-11 w-11 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center">
                     <MapPin className="h-5 w-5 text-muted-foreground" />
                   </div>
@@ -245,13 +256,13 @@ const Contact = () => {
                 ease: "easeOut",
                 delay: prefersReducedMotion ? 0 : 0.04,
               }}
-              className="cyber-card rounded-xl p-6 sm:p-7"
+                className="cyber-card rounded-xl p-6 sm:p-7 w-full h-full flex flex-col"
             >
               <h2 className="text-xl font-semibold text-foreground mb-6">
                 Send a Message
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4 flex-1">
                 {/* Honeypot */}
                 <input
                   type="text"

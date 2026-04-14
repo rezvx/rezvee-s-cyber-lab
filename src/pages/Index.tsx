@@ -3,7 +3,8 @@ import { ArrowRight, Github, Download, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
+
 
 
 
@@ -29,6 +30,7 @@ return () => window.clearTimeout(id);
   }, [run]);
 }
 
+
 export default function Index() {
   
   useIdlePrefetch(() => {
@@ -40,24 +42,15 @@ export default function Index() {
   return (
     <Layout>
 
-      <Helmet>
-        <title>Home | Rezvee Parvez Ashique</title>
-        <link rel="canonical" href="https://rezv.me/" />
-        <meta
-          name="description"
-          content="Rezvee Parvez is a Network & Application Security Practitioner focused on secure network design, vulnerability assessment, and hands-on lab learning."
-        />
-        <meta
-          name="keywords"
-          content="Rezvee Parvez, cybersecurity, network security, application security, ethical hacking, lab-based learning"
-        />
-        <meta property="og:title" content="Home | Rezvee Parvez" />
-        <meta
-          property="og:description"
-          content="Network & Application Security Practitioner with hands-on experience in secure network design and vulnerability assessment."
-        />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <PageHelmet
+                title="Home | Rezvee Parvez"
+                canonical="https://rezv.me/"
+                description="Hi there! I'm Rezvee Parvez, a cybersecurity enthusiast with hands-on experience in network and application security."
+                keywords="Rezvee Parvez, cybersecurity, network security, ethical hacking professional."
+                ogTitle="Home | Rezvee Parvez"
+                ogDescription="Hi there! I'm Rezvee Parvez, a cybersecurity enthusiast with hands-on experience in network and application security. Explore my projects, skills, and certifications in the world of ethical hacking and defensive security."
+                ogType="website"
+              />
 
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">

@@ -2,7 +2,7 @@ import { Network, Shield, Wrench, Monitor, FileText, Brain } from "lucide-react"
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import SkillCard from "@/components/SkillCard";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
 
 const skillCategories = [
   {
@@ -98,24 +98,15 @@ const Skills = () => {
   return (
     <Layout>
 
- <Helmet>
-      <title>Skills | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/skills" />
-      <meta
-        name="description"
-        content="Explore the technical skills and expertise of Rezvee Parvez in networking, cybersecurity, AI learning, and technical documentation."
-      />
-      <meta
-        name="keywords"
-        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
-      />
-      <meta property="og:title" content="Skills | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Network & cybersecurity professional dedicated to ethical security practices and lab-based learning."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
+ <PageHelmet
+                  title="Skills | Rezvee Parvez"
+                  canonical="https://rezv.me/skills"
+                  description="Showcasing my skills & competencies in cybersecurity, networking, and AI-driven productivity."
+                  keywords="Rezvee Parvez, cybersecurity certifications, network security certifications, ethical hacking certifications, CCNA, TryHackMe, Hack & Fix"
+                  ogTitle="Skills | Rezvee Parvez"
+                  ogDescription="Showcasing my skills & competencies in cybersecurity, networking, and AI-driven productivity."
+                  ogType="website"
+                />
 
       <section className="py-20">
         <div className="container mx-auto px-4">

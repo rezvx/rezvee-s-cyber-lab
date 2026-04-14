@@ -104,6 +104,16 @@
     --ring: 174 72% 56%;
   }
 
+  /* Hide ScrollLayout's inner scrollbar */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
   /* Base element styling */
   * {
     @apply border-border;

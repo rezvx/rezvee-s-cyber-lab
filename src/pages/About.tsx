@@ -1,8 +1,8 @@
 import { Shield, Target, BookOpen, Award, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
-import { Helmet } from "react-helmet-async";
 import SectionHeader from "@/components/SectionHeader";
 import { motion, useReducedMotion } from "framer-motion";
+import PageHelmet from "@/components/PageHelmet";
 
 const About = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -20,24 +20,15 @@ const About = () => {
     
     <Layout>
 
-        <Helmet>
-      <title>About | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/about" />
-      <meta
-        name="description"
-        content="Learn about Rezvee Parvez — a network and cybersecurity professional focused on secure network design, vulnerability assessment, and lab-based learning."
-      />
-      <meta
-        name="keywords"
-        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
-      />
-      <meta property="og:title" content="About | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Network & Cybersecurity Professional dedicated to ethical security practices."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
+       <PageHelmet
+    title="About | Rezvee Parvez"
+    canonical="https://rezv.me/about"
+    description="Learn about Rezvee Parvez — a network and cybersecurity professional focused on secure network design, vulnerability assessment, and lab-based learning."
+    keywords="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
+    ogTitle="About | Rezvee Parvez"
+    ogDescription="Network & Cybersecurity Professional dedicated to ethical security practices."
+    ogType="website"
+  />
        
 
       <section className="py-20">

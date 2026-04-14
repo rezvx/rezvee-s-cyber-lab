@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy } from "react";
+import { useEffect, Suspense, lazy, } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,25 +7,22 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
-// Lazy pages (code splitting)
-const Index = lazy(() => import("./pages/Index"));
-const About = lazy(() => import("./pages/About"));
-const Skills = lazy(() => import("./pages/Skills"));
-const Projects = lazy(() => import("./pages/Projects"));
-const Reports = lazy(() => import("./pages/Reports"));
-const Resume = lazy(() => import("./pages/Resume"));
-const Contact = lazy(() => import("./pages/Contact"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-
-// Lazy MotionShell (loads framer-motion only when ready)
-const MotionShell = lazy(() => import("./components/MotionShell"));
+// Lazy pages
+const Index          = lazy(() => import("./pages/Index"));
+const About          = lazy(() => import("./pages/About"));
+const Skills         = lazy(() => import("./pages/Skills"));
+const Projects       = lazy(() => import("./pages/Projects"));
+const Reports        = lazy(() => import("./pages/Reports"));
+const Certifications = lazy(() => import("./pages/Certifications"));
+const Resume         = lazy(() => import("./pages/Resume"));
+const Contact        = lazy(() => import("./pages/Contact"));
+const NotFound       = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
 function RedirectHandler() {
   const navigate = useNavigate();
   const location = useLocation();
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const redirect = params.get("redirect");
@@ -33,7 +30,6 @@ function RedirectHandler() {
       navigate(redirect, { replace: true });
     }
   }, [navigate, location.search]);
-
   return null;
 }
 
@@ -57,14 +53,15 @@ function RouteFallback() {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/skills" element={<Skills />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/reports" element={<Reports />} />
-      <Route path="/resume" element={<Resume />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path="/"               element={<Index />} />
+      <Route path="/about"          element={<About />} />
+      <Route path="/skills"         element={<Skills />} />
+      <Route path="/projects"       element={<Projects />} />
+      <Route path="/reports"        element={<Reports />} />
+      <Route path="/certifications" element={<Certifications />} />
+      <Route path="/contact"        element={<Contact />} />
+      <Route path="/resume"         element={<Resume />} />
+      <Route path="*"               element={<NotFound />} />
     </Routes>
   );
 }
@@ -72,27 +69,20 @@ function AppRoutes() {
 export default function App() {
   return (
     <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <RedirectHandler />
-          {/* Static nav */}
-          <Navigation />
-          {/* Route code-splitting */}
-          <Suspense fallback={<RouteFallback />}>
-            {/* Animation shell loads lazily (framer-motion split) */}
-            <Suspense fallback={<div className="pt-16" />}>
-              <MotionShell>
-                <AppRoutes />
-              </MotionShell>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <RedirectHandler />
+            <Navigation />
+            <Suspense fallback={<RouteFallback />}>
+              <AppRoutes />
             </Suspense>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }

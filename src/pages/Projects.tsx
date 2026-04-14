@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import SectionHeader from "@/components/SectionHeader";
 import ProjectCard from "@/components/ProjectCard";
-import { Helmet } from "react-helmet-async";
+import PageHelmet from "@/components/PageHelmet";
 
 const projects = [
   {
@@ -97,24 +97,16 @@ const Projects = () => {
   return (
     <Layout>
 
-      <Helmet>
-      <title>Projects | Rezvee Parvez</title>
-      <link rel="canonical" href="https://rezv.me/projects" />
-      <meta
-        name="description"
-        content="Explore hands-on cybersecurity projects by Rezvee Parvez, including network design, vulnerability assessment, and AI server testing. Each project includes detailed documentation and reports."
-      />
-      <meta
-        name="keywords"
-        content="Rezvee Parvez, cybersecurity, network security, ethical hacking, OWASP, VLAN, OSPF, penetration testing"
-      />
-      <meta property="og:title" content="Projects | Rezvee Parvez" />
-      <meta
-        property="og:description"
-        content="Network & Cybersecurity Professional dedicated to ethical security practices."
-      />
-      <meta property="og:type" content="website" />
-    </Helmet>
+      <PageHelmet
+                      title="Projects | Rezvee Parvez"
+                      canonical="https://rezv.me/projects"
+                      description="Explore my cybersecurity projects, including network design, VAPT, and AI server testing. Each project includes detailed documentation, methodology, and outcomes."
+                      keywords="Rezvee Parvez, cybersecurity projects, network design, vulnerability assessment, penetration testing, AI server testing, project documentation"
+                      ogTitle="Projects | Rezvee Parvez"
+                      ogDescription="Explore my cybersecurity projects, including network design, VAPT, and AI server testing. Each project includes detailed documentation, methodology, and outcomes."
+                      ogType="website"
+                    />
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <SectionHeader
