@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import StreamPlayer from './StreamPlayer';
+import Stream from './pages/Live';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 // ─── Lazy Pages ──────────────────────────────────────────────────
@@ -18,6 +20,7 @@ const Resume         = lazy(() => import("./pages/Resume"));
 const Contact        = lazy(() => import("./pages/Contact"));
 const Live           = lazy(() => import("./pages/Live"));         // ← added
 const NotFound       = lazy(() => import("./pages/NotFound"));
+
 
 // ─── Query Client ────────────────────────────────────────────────
 const queryClient = new QueryClient();

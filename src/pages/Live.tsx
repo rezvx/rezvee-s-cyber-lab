@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { streamConfig, upcomingSchedule } from "@/config/stream";
+import StreamPlayer from "@/components/StreamPlayer";
 
 // ─── TYPES ───────────────────────────────────────────────────────
 interface ScheduleItem {
@@ -61,7 +62,13 @@ function Cursor() {
     const id = setInterval(() => setOn((v) => !v), 530);
     return () => clearInterval(id);
   }, []);
-  return <span className={`inline-block w-2 h-4 bg-[#4ade80] ml-0.5 align-middle transition-opacity ${on ? "opacity-100" : "opacity-0"}`} />;
+  return (
+    <span
+      className={`inline-block w-2 h-4 bg-[#4ade80] ml-0.5 align-middle transition-opacity ${
+        on ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  );
 }
 
 // ─── TYPEWRITER ──────────────────────────────────────────────────
@@ -77,17 +84,21 @@ function Typewriter({ text, speed = 40 }: { text: string; speed?: number }) {
     }, speed);
     return () => clearInterval(id);
   }, [text, speed]);
-  return <span>{displayed}<Cursor /></span>;
+  return (
+    <span>
+      {displayed}
+      <Cursor />
+    </span>
+  );
 }
 
 // ─── MAIN PAGE ───────────────────────────────────────────────────
 export default function Live() {
-  const { isLive, youtubeVideoId, streamTitle, streamDescription } = streamConfig;
+  const { isLive, streamTitle, streamDescription } = streamConfig;
   const glitch = useGlitch();
 
   return (
     <div className="min-h-screen bg-[#060a06] text-[#4ade80] relative overflow-x-hidden font-mono">
-
       <Scanlines />
 
       {/* Ambient green glow */}
@@ -110,7 +121,6 @@ export default function Live() {
         transition={{ duration: 0.6 }}
         className="pt-24 pb-8 px-4 max-w-5xl mx-auto"
       >
-        {/* Top bar — like a terminal window */}
         <div className="border border-[#4ade80]/20 rounded-t-lg bg-[#0a120a] px-4 py-2 flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-red-500/70" />
           <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
@@ -120,7 +130,6 @@ export default function Live() {
           </span>
         </div>
 
-        {/* Terminal body */}
         <div className="border border-t-0 border-[#4ade80]/20 rounded-b-lg bg-[#060a06] px-6 py-6">
           <p className="text-[#4ade80]/50 text-xs mb-1">$ whoami</p>
           <div
@@ -131,7 +140,8 @@ export default function Live() {
             rezvX<span className="text-white">.live</span>
           </div>
           <p className="text-[#4ade80]/40 text-xs mt-3">
-            <span className="text-[#4ade80]/60">// </span>{streamDescription}
+            <span className="text-[#4ade80]/60">// </span>
+            {streamDescription}
           </p>
         </div>
       </motion.header>
@@ -140,7 +150,7 @@ export default function Live() {
       <section className="px-4 max-w-5xl mx-auto">
         <AnimatePresence mode="wait">
           {isLive ? (
-            <LivePlayer key="live" videoId={youtubeVideoId} title={streamTitle} />
+            <LivePlayer key="live" title={streamTitle} />
           ) : (
             <OfflineScreen key="offline" />
           )}
@@ -156,7 +166,7 @@ export default function Live() {
 }
 
 // ─── LIVE PLAYER ─────────────────────────────────────────────────
-function LivePlayer({ videoId, title }: { videoId: string; title: string }) {
+function LivePlayer({ title }: { title: string }) {
   const [viewers, setViewers] = useState(Math.floor(Math.random() * 40) + 8);
   const [elapsed, setElapsed] = useState(0);
   const start = useRef(Date.now());
@@ -206,7 +216,7 @@ function LivePlayer({ videoId, title }: { videoId: string; title: string }) {
         {/* Viewer count */}
         <div className="flex items-center gap-1.5 text-[#4ade80]/60 text-xs border border-[#4ade80]/20 rounded px-3 py-1">
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
           </svg>
           <span>{viewers} watching</span>
         </div>
@@ -224,13 +234,11 @@ function LivePlayer({ videoId, title }: { videoId: string; title: string }) {
 
       {/* Player with logo watermark */}
       <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-[#4ade80]/20 shadow-[0_0_80px_#4ade8011]">
-        <iframe
-          className="w-full h-full"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-        {/* Logo watermark — bottom left, 50% transparent */}
+
+        {/* ✅ StreamPlayer — clean, no extra props */}
+        <StreamPlayer />
+
+        {/* Logo watermark */}
         <div className="absolute bottom-4 left-4 pointer-events-none select-none opacity-50">
           <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded px-2.5 py-1.5">
             <span className="text-white font-bold text-sm tracking-tight">
@@ -256,11 +264,17 @@ function OfflineScreen() {
 
   useEffect(() => {
     setShown([]);
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     lines.forEach((line, i) => {
-      setTimeout(() => {
-        setShown((prev) => [...prev, line]);
+      const t = setTimeout(() => {
+        setShown((prev) => {
+          if (prev.includes(line)) return prev;
+          return [...prev, line];
+        });
       }, i * 700);
+      timeouts.push(t);
     });
+    return () => timeouts.forEach(clearTimeout);
   }, []);
 
   return (
@@ -271,10 +285,7 @@ function OfflineScreen() {
       transition={{ duration: 0.4 }}
       className="w-full"
     >
-      {/* Terminal block */}
       <div className="border border-[#4ade80]/20 rounded-lg overflow-hidden">
-
-        {/* Title bar */}
         <div className="bg-[#0a120a] border-b border-[#4ade80]/10 px-4 py-2 flex items-center justify-between">
           <span className="text-[#4ade80]/40 text-xs">stream_status.sh</span>
           <div className="flex items-center gap-2">
@@ -283,7 +294,6 @@ function OfflineScreen() {
           </div>
         </div>
 
-        {/* Terminal output */}
         <div className="bg-[#060a06] px-6 py-8 min-h-[280px] flex flex-col justify-center">
           <div className="space-y-2">
             {shown.map((line, i) => (
@@ -314,7 +324,6 @@ function OfflineScreen() {
             ))}
           </div>
 
-          {/* Blinking prompt after all lines shown */}
           {shown.length === lines.length && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -329,7 +338,6 @@ function OfflineScreen() {
         </div>
       </div>
 
-      {/* Hint below */}
       <p className="text-center text-[#4ade80]/25 text-xs mt-4 tracking-widest">
         // BROADCAST RESUMES SOON — CHECK SCHEDULE BELOW
       </p>
@@ -339,7 +347,6 @@ function OfflineScreen() {
 
 // ─── SCHEDULE ────────────────────────────────────────────────────
 function Schedule({ items }: { items: ScheduleItem[] }) {
-  // Sort soonest first, passed sessions pushed to bottom
   const sorted = [...items].sort((a, b) => {
     const da = new Date(a.date).getTime();
     const db = new Date(b.date).getTime();
@@ -359,7 +366,6 @@ function Schedule({ items }: { items: ScheduleItem[] }) {
       transition={{ duration: 0.5 }}
       className="max-w-5xl mx-auto px-4 mt-16 pb-8"
     >
-      {/* Section header */}
       <div className="flex items-center gap-3 mb-8">
         <span className="text-[#4ade80]/50 text-xs tracking-[0.3em] uppercase">
           // Upcoming Sessions
@@ -368,7 +374,6 @@ function Schedule({ items }: { items: ScheduleItem[] }) {
         <span className="text-[#4ade80]/25 text-xs">{sorted.length} scheduled</span>
       </div>
 
-      {/* Schedule list — soonest at top */}
       <div className="space-y-3">
         {sorted.map((item, i) => (
           <ScheduleCard key={item.id} item={item} index={i} />
@@ -398,7 +403,6 @@ function ScheduleCard({ item, index }: { item: ScheduleItem; index: number }) {
           : "border-[#4ade80]/15 hover:border-[#4ade80]/35 hover:bg-[#4ade80]/[0.02]"
       }`}
     >
-      {/* Date block */}
       <div className="shrink-0 w-24 text-center md:text-left">
         <div className={`text-xs font-bold tracking-widest uppercase ${isToday ? "text-[#4ade80]" : "text-[#4ade80]/50"}`}>
           {until}
@@ -406,10 +410,8 @@ function ScheduleCard({ item, index }: { item: ScheduleItem; index: number }) {
         <div className="text-[#4ade80]/30 text-[10px] mt-0.5">{formatDate(item.date)}</div>
       </div>
 
-      {/* Divider */}
       <div className="hidden md:block w-px h-10 bg-[#4ade80]/10 shrink-0" />
 
-      {/* Content */}
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-1">
           <span className="px-2 py-0.5 rounded border border-[#4ade80]/20 text-[#4ade80]/60 text-[9px] tracking-widest uppercase">
@@ -427,7 +429,6 @@ function ScheduleCard({ item, index }: { item: ScheduleItem; index: number }) {
         <p className="text-[#4ade80]/35 text-xs mt-0.5">{item.description}</p>
       </div>
 
-      {/* Time */}
       <div className="shrink-0 text-right">
         <div className={`text-sm font-bold tabular-nums ${isToday ? "text-[#4ade80]" : "text-[#4ade80]/50"}`}>
           {item.time}

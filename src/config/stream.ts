@@ -2,7 +2,7 @@
 // Toggle isLive + paste video ID when going live, then git push
 
 export const streamConfig = {
-  isLive: false, // change to true when going live
+  isLive: true, // change to true when going live
   youtubeVideoId: "", // change here when going live, e.g. "dQw4w9WgXcQ"
   streamTitle: "FIFA WC 2026",
   streamDescription: "Cybersecurity • Tech • Sports",
