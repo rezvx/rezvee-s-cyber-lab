@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy, } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
-// Lazy pages
+// ─── Lazy Pages ──────────────────────────────────────────────────
 const Index          = lazy(() => import("./pages/Index"));
 const About          = lazy(() => import("./pages/About"));
 const Skills         = lazy(() => import("./pages/Skills"));
@@ -16,13 +16,17 @@ const Reports        = lazy(() => import("./pages/Reports"));
 const Certifications = lazy(() => import("./pages/Certifications"));
 const Resume         = lazy(() => import("./pages/Resume"));
 const Contact        = lazy(() => import("./pages/Contact"));
+const Live           = lazy(() => import("./pages/Live"));         // ← added
 const NotFound       = lazy(() => import("./pages/NotFound"));
 
+// ─── Query Client ────────────────────────────────────────────────
 const queryClient = new QueryClient();
 
+// ─── Redirect Handler ────────────────────────────────────────────
 function RedirectHandler() {
   const navigate = useNavigate();
   const location = useLocation();
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const redirect = params.get("redirect");
@@ -30,17 +34,22 @@ function RedirectHandler() {
       navigate(redirect, { replace: true });
     }
   }, [navigate, location.search]);
+
   return null;
 }
 
+// ─── Scroll To Top ───────────────────────────────────────────────
 function ScrollToTop() {
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
+
   return null;
 }
 
+// ─── Route Fallback ──────────────────────────────────────────────
 function RouteFallback() {
   return (
     <div className="pt-24 px-6">
@@ -50,6 +59,7 @@ function RouteFallback() {
   );
 }
 
+// ─── Routes ──────────────────────────────────────────────────────
 function AppRoutes() {
   return (
     <Routes>
@@ -59,13 +69,15 @@ function AppRoutes() {
       <Route path="/projects"       element={<Projects />} />
       <Route path="/reports"        element={<Reports />} />
       <Route path="/certifications" element={<Certifications />} />
-      <Route path="/contact"        element={<Contact />} />
       <Route path="/resume"         element={<Resume />} />
+      <Route path="/contact"        element={<Contact />} />
+      <Route path="/live"           element={<Live />} />           {/* ← added */}
       <Route path="*"               element={<NotFound />} />
     </Routes>
   );
 }
 
+// ─── App ─────────────────────────────────────────────────────────
 export default function App() {
   return (
     <HelmetProvider>

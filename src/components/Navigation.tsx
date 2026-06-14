@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, Suspense, lazy } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
+import { streamConfig } from "@/config/stream";
 import logo from "@/assets/logo.svg";
 import { Button } from "@/components/ui/button";
 
@@ -17,6 +17,7 @@ const navItems = [
   { name: "Certifications", path: "/certifications" },
   { name: "Resume",         path: "/resume" },
   { name: "Contact",        path: "/contact" },
+{name: "Live",              path: "/live" },  
 ] as const;
 
 const preloadMap: Partial<Record<(typeof navItems)[number]["path"], () => Promise<unknown>>> = {
@@ -24,6 +25,7 @@ const preloadMap: Partial<Record<(typeof navItems)[number]["path"], () => Promis
   "/reports":        () => import("@/pages/Reports"),
   "/certifications": () => import("@/pages/Certifications"),
   "/resume":         () => import("@/pages/Resume"),
+  "/live": () => import("@/pages/Live") ,
 };
 
 export default function Navigation() {
