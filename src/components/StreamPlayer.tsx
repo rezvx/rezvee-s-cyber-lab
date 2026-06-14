@@ -10,7 +10,7 @@ export default function StreamPlayer() {
     const video = videoRef.current;
     if (!video) return;
 
-    const streamUrl = 'https://stream.rezv.me/live/rezvx/index.m3u8';
+    const streamUrl = 'http://stream.rezv.me/live/rezvx/index.m3u8';
 
     if (Hls.isSupported()) {
       const hls = new Hls();
