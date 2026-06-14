@@ -1,4 +1,4 @@
-import{j as e}from"./query-B75Qa7kW.js";import{c as r}from"./index-v_9TiGxY.js";import"./router-sb70qsgZ.js";/**
+import{j as e}from"./query-B75Qa7kW.js";import{c as r}from"./index-kz3kmR44.js";import"./router-sb70qsgZ.js";/**
  * @license lucide-react v0.462.0 - ISC
  *
  * This source code is licensed under the ISC license.
