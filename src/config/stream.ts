@@ -1,20 +1,17 @@
-// ─── STREAM CONFIG ───────────────────────────────────────────────
-// Toggle isLive + paste video ID when going live, then git push
-
 export const streamConfig = {
-  isLive: false, // change to true when going live
-  youtubeVideoId: "", // change here when going live, e.g. "dQw4w9WgXcQ"
   streamTitle: "FIFA WC 2026",
   streamDescription: "Cybersecurity • Tech • Sports",
+
+  apiUrl: "http://localhost:9997",
+  streamPath: "live/rezvx",
 };
 
 // ─── UPCOMING SCHEDULE ───────────────────────────────────────────
-// Add/remove sessions freely — shows on the Live page
 export const upcomingSchedule = [
   {
     id: "s1",
     title: "Spain VS Cabo Verde",
-  description: "FIFA World Cup 2026 Group Stage Match",
+    description: "FIFA World Cup 2026 Group Stage Match",
     date: "2026-06-15",
     time: "22:00",
     timezone: "BST+6",

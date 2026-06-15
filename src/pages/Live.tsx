@@ -14,6 +14,38 @@ interface ScheduleItem {
   tag: string;
 }
 
+// ─── AUTO LIVE DETECTION ─────────────────────────────────────────
+function useIsLive() {
+  const [isLive, setIsLive] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    const check = async () => {
+      try {
+        const res = await fetch(
+          `${streamConfig.apiUrl}/v3/paths/list`
+        );
+        if (!res.ok) throw new Error("API error");
+        const data = await res.json();
+        const stream = data.items?.find(
+          (item: any) => item.name === streamConfig.streamPath
+        );
+        setIsLive(!!stream?.ready);
+      } catch {
+        setIsLive(false);
+      } finally {
+        setChecking(false);
+      }
+    };
+
+    check(); // immediate check on load
+    const id = setInterval(check, 5000); // recheck every 5 seconds
+    return () => clearInterval(id);
+  }, []);
+
+  return { isLive, checking };
+}
+
 // ─── HELPERS ─────────────────────────────────────────────────────
 function useGlitch() {
   const [glitch, setGlitch] = useState(false);
@@ -30,13 +62,19 @@ function useGlitch() {
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
-  return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
 }
 
 function daysUntil(dateStr: string) {
   const now = new Date();
   const target = new Date(dateStr);
-  const diff = Math.ceil((target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  const diff = Math.ceil(
+    (target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+  );
   if (diff === 0) return "Today";
   if (diff === 1) return "Tomorrow";
   if (diff < 0) return "Passed";
@@ -49,7 +87,8 @@ function Scanlines() {
     <div
       className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
       style={{
-        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, #000 2px, #000 4px)",
+        backgroundImage:
+          "repeating-linear-gradient(0deg, transparent, transparent 2px, #000 2px, #000 4px)",
       }}
     />
   );
@@ -92,9 +131,39 @@ function Typewriter({ text, speed = 40 }: { text: string; speed?: number }) {
   );
 }
 
+// ─── CHECKING SCREEN ─────────────────────────────────────────────
+function CheckingScreen() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="w-full border border-[#4ade80]/20 rounded-lg overflow-hidden"
+    >
+      <div className="bg-[#0a120a] border-b border-[#4ade80]/10 px-4 py-2 flex items-center justify-between">
+        <span className="text-[#4ade80]/40 text-xs">stream_status.sh</span>
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-yellow-500/50 animate-pulse" />
+          <span className="text-yellow-400/70 text-xs tracking-widest uppercase">
+            Checking
+          </span>
+        </div>
+      </div>
+      <div className="bg-[#060a06] px-6 py-8 min-h-[280px] flex items-center justify-center">
+        <div className="flex items-center gap-3 text-[#4ade80]/40 text-sm">
+          <span className="animate-spin inline-block w-4 h-4 border-2 border-[#4ade80]/30 border-t-[#4ade80] rounded-full" />
+          <span>Connecting to stream server</span>
+          <Cursor />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 // ─── MAIN PAGE ───────────────────────────────────────────────────
 export default function Live() {
-  const { isLive, streamTitle, streamDescription } = streamConfig;
+  const { streamTitle, streamDescription } = streamConfig;
+  const { isLive, checking } = useIsLive();
   const glitch = useGlitch();
 
   return (
@@ -134,7 +203,9 @@ export default function Live() {
           <p className="text-[#4ade80]/50 text-xs mb-1">$ whoami</p>
           <div
             className={`text-2xl md:text-3xl font-bold text-[#4ade80] tracking-tight transition-all duration-75 ${
-              glitch ? "translate-x-[2px] opacity-80 [text-shadow:2px_0_#f00,-2px_0_#0ff]" : ""
+              glitch
+                ? "translate-x-[2px] opacity-80 [text-shadow:2px_0_#f00,-2px_0_#0ff]"
+                : ""
             }`}
           >
             rezvX<span className="text-white">.live</span>
@@ -146,10 +217,12 @@ export default function Live() {
         </div>
       </motion.header>
 
-      {/* ── Live / Offline ── */}
+      {/* ── Live / Checking / Offline ── */}
       <section className="px-4 max-w-5xl mx-auto">
         <AnimatePresence mode="wait">
-          {isLive ? (
+          {checking ? (
+            <CheckingScreen key="checking" />
+          ) : isLive ? (
             <LivePlayer key="live" title={streamTitle} />
           ) : (
             <OfflineScreen key="offline" />
@@ -203,17 +276,16 @@ function LivePlayer({ title }: { title: string }) {
     >
       {/* Status bar */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
-
-        {/* Live pill */}
         <div className="flex items-center gap-2 border border-red-500/40 bg-red-500/10 rounded px-3 py-1">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
           </span>
-          <span className="text-red-400 text-xs tracking-[0.2em] uppercase">ON AIR</span>
+          <span className="text-red-400 text-xs tracking-[0.2em] uppercase">
+            ON AIR
+          </span>
         </div>
 
-        {/* Viewer count */}
         <div className="flex items-center gap-1.5 text-[#4ade80]/60 text-xs border border-[#4ade80]/20 rounded px-3 py-1">
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
@@ -221,24 +293,18 @@ function LivePlayer({ title }: { title: string }) {
           <span>{viewers} watching</span>
         </div>
 
-        {/* Timer */}
         <div className="text-[#4ade80]/40 text-xs border border-[#4ade80]/10 rounded px-3 py-1">
           {fmt(elapsed)}
         </div>
 
-        {/* Title */}
         <div className="text-[#4ade80]/60 text-xs ml-auto hidden md:block truncate max-w-xs">
           // {title}
         </div>
       </div>
 
-      {/* Player with logo watermark */}
+      {/* Player */}
       <div className="relative w-full aspect-video rounded-lg overflow-hidden border border-[#4ade80]/20 shadow-[0_0_80px_#4ade8011]">
-
-        {/* ✅ StreamPlayer — clean, no extra props */}
         <StreamPlayer />
-
-        {/* Logo watermark */}
         <div className="absolute bottom-4 left-4 pointer-events-none select-none opacity-50">
           <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded px-2.5 py-1.5">
             <span className="text-white font-bold text-sm tracking-tight">
@@ -290,7 +356,9 @@ function OfflineScreen() {
           <span className="text-[#4ade80]/40 text-xs">stream_status.sh</span>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500/50" />
-            <span className="text-red-400/70 text-xs tracking-widest uppercase">Offline</span>
+            <span className="text-red-400/70 text-xs tracking-widest uppercase">
+              Offline
+            </span>
           </div>
         </div>
 
@@ -407,7 +475,9 @@ function ScheduleCard({ item, index }: { item: ScheduleItem; index: number }) {
         <div className={`text-xs font-bold tracking-widest uppercase ${isToday ? "text-[#4ade80]" : "text-[#4ade80]/50"}`}>
           {until}
         </div>
-        <div className="text-[#4ade80]/30 text-[10px] mt-0.5">{formatDate(item.date)}</div>
+        <div className="text-[#4ade80]/30 text-[10px] mt-0.5">
+          {formatDate(item.date)}
+        </div>
       </div>
 
       <div className="hidden md:block w-px h-10 bg-[#4ade80]/10 shrink-0" />
