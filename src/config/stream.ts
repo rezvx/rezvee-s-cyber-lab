@@ -2,7 +2,7 @@ export const streamConfig = {
   streamTitle: "FIFA WC 2026",
   streamDescription: "Cybersecurity • Tech • Sports",
 
-  apiUrl: "http://localhost:9997",
+  apiUrl: "https://api.rezv.me",
   streamPath: "live/rezvx",
 };
 
