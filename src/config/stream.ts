@@ -13,10 +13,10 @@ export const streamConfig = {
 export const upcomingSchedule = [
   {
     id: "s1",
-    title: "Germany VS Curaçao",
+    title: "Spain VS Cabo Verde",
   description: "FIFA World Cup 2026 Group Stage Match",
-    date: "2026-06-26",
-    time: "23:00",
+    date: "2026-06-15",
+    time: "22:00",
     timezone: "BST+6",
     tag: "Football",
   },
