@@ -13,7 +13,7 @@ export const upcomingSchedule = [
     title: "Saudi Arabia VS Uruguay",
     description: "FIFA World Cup 2026 Group Stage Match",
     date: "2026-06-15",
-    time: "22:00",
+    time: "04:00 AM",
     timezone: "BST+6",
     tag: "Football",
   },
