@@ -10,7 +10,7 @@ export const streamConfig = {
 export const upcomingSchedule = [
   {
     id: "s1",
-    title: "Spain VS Cabo Verde",
+    title: "Saudi Arabia VS Uruguay",
     description: "FIFA World Cup 2026 Group Stage Match",
     date: "2026-06-15",
     time: "22:00",
