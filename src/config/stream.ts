@@ -16,6 +16,6 @@ export const upcomingSchedule = [
     time: "11:00 PM",
     timezone: "BST+6",
     tag: "FIFA World Cup 2026",
-  },
-  
+  }
+
 ];
